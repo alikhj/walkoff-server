@@ -1,2 +1,0 @@
-# walkoff-server
-walkoff-server
