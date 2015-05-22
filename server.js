@@ -17,7 +17,7 @@ app.route('/')
 
 io.on('connection', function (socket) {
 
-  console.log('\n***** ' + getTimeStamp() + ' connected ' + socket.id)
+  console.log('\n****** ' + getTimeStamp() + ' connected ' + socket.id)
 
   /**
    * Handle socket.io errors
