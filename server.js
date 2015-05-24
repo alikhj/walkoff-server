@@ -38,7 +38,7 @@ io.on('connection', function (socket) {
    * }
    */
   socket.on('rejoin-game', function (data) {
-    console.log('\n***** ' + getTimeStamp() + 'rejoin-game: ' + data.gameID +
+    console.log('\n' + getTimeStamp() + 'rejoin-game: ' + data.gameID +
                 '\nplayerID: ' + data.playerID)
 
     socket.join(data.gameID)
@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
    */
   socket.on('join-game', function (data) {
 
-    console.log('\n***** ' + getTimeStamp() + ' join-game by player ' + data.playerID)
+    console.log('\n' + getTimeStamp() + ' join-game received from player ' + data.playerID)
     var tmpGameID = data.playerIDs.join('')
 
     if (data.playerID && !socket.playerID) {
@@ -112,8 +112,8 @@ io.on('connection', function (socket) {
       newScore: data.newScore,
       playerID: data.playerID
     })
-    console.log('\n***** ' + getTimeStamp() + '\nplayerID: ' + data.playerID + '\ngameID: ' +
-                data.gameID + '\nsteps: ' + data.newScore)
+    console.log('\n' + getTimeStamp() + '\nplayerID: ' + data.playerID + '\ngameID: ' +
+                data.gameID + '\score: ' + data.newScore)
   })
 
   /**
@@ -158,15 +158,23 @@ io.on('connection', function (socket) {
    * data required: none
    */
   socket.on('disconnect', function() {
-    console.log('\n***** ' + getTimeStamp() + ' player disconnected: ' + socket.playerID)
-    socket.emit('player-disconnected', {
-      playerID: socket.playerID
-    })
+    console.log('\n' + getTimeStamp() + ' player disconnected: ' + socket.playerID)
+    console.log('player disconnected from all these games ' + socket.rooms)
+
+    for (var i = 0; i < socket.rooms; i++) {
+      var gameID = socket.rooms[i]
+      console.log('notifying ' + gameID + ' that ' + socket.playerID + ' just left')
+
+      socket.to(gameID).emit('player-disconnected', {
+        playerID: socket.playerID
+        gameID: gameID
+      })
+    }
   })
 })
 
 server.listen(2000)
-console.info(getTimeStamp() + ' Project butt has been started. Listening on port 2000.')
+console.info(getTimeStamp() + ' walkoff-server started. Listening on port 2000.')
 
 function getTimeStamp() {
   var date = new Date()
