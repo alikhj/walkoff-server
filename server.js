@@ -106,14 +106,14 @@ io.on('connection', function (socket) {
    *   playerID: string
    * }
    */
-  socket.on('send-steps', function (data) {
-    socket.to(data.gameID).emit('steps-update', {
+  socket.on('update-score', function (data) {
+    socket.to(data.gameID).emit('score-updated', {
       gameID: data.gameID,
-      newStepsCount: data.newStepsCount,
+      newScore: data.newScore,
       playerID: data.playerID
     })
     console.log('\n***** ' + getTimeStamp() + '\nplayerID: ' + data.playerID + '\ngameID: ' +
-                data.gameID + '\nsteps: ' + data.newStepsCount)
+                data.gameID + '\nsteps: ' + data.newScore)
   })
 
   /**
