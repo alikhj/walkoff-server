@@ -6,7 +6,8 @@ var express = require('express'),
   io = require('socket.io').listen(server),
   crypto = require('crypto'),
   uuid = require('uuid'),
-  games = {}
+  games = {},
+roomsCopy = []
 
 httpServer.globalAgent.maxSockets = 1000
 
@@ -81,7 +82,8 @@ io.on('connection', function (socket) {
     }
 
     socket.join(games[tmpGameID].gameUUID)
-
+roomsCopy.push(games[tmpGameID].gameUUID)
+console.log('kk' + roomsCopy[0])
     socket.emit('game-joined', {
       gameID: games[tmpGameID].gameUUID,
       state: data.playerCount === games[tmpGameID].connectedPlayers ? 'starting' : 'waiting',
@@ -159,17 +161,13 @@ io.on('connection', function (socket) {
    */
   socket.on('disconnect', function() {
     console.log('\n' + getTimeStamp() + ' player disconnected: ' + socket.playerID)
-    console.log('player disconnected from all these games ' + socket.rooms)
+    console.log('player disconnected from all these games ' + roomsCopy.count)
+console.log(roomsCopy[0])
 
-    for (var i = 0; i < socket.rooms; i++) {
-      var gameID = socket.rooms[i]
-      console.log('notifying ' + gameID + ' that ' + socket.playerID + ' just left')
-
-      socket.to(gameID).emit('player-disconnected', {
-        playerID: socket.playerID
-        gameID: gameID
+      socket.to(roomsCopy[0]).emit('player-disconnected', {
+        playerID: socket.playerID,
+        gameID: roomsCopy[0]
       })
-    }
   })
 })
 
