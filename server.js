@@ -6,8 +6,7 @@ var express = require('express'),
   io = require('socket.io').listen(server),
   crypto = require('crypto'),
   uuid = require('uuid'),
-  games = {},
-roomsCopy = []
+  games = {}
 
 httpServer.globalAgent.maxSockets = 1000
 
@@ -18,7 +17,8 @@ app.route('/')
 
 io.on('connection', function (socket) {
 
-  console.log('\n****** ' + getTimeStamp() + ' connected ' + socket.id)
+  console.log('\n' + getTimeStamp() + ' ' + socket.id + ' connected')
+  socket.games = []
 
   /**
    * Handle socket.io errors
@@ -31,28 +31,6 @@ io.on('connection', function (socket) {
   // })
 
   /**
-   * Rejoin an already established game
-   * data required:
-   * {
-   *   gameID: string
-   *   socket.player : string
-   * }
-   */
-  socket.on('rejoin-game', function (data) {
-    console.log('\n' + getTimeStamp() + 'rejoin-game: ' + data.gameID +
-                '\nplayerID: ' + data.playerID)
-
-    socket.join(data.gameID)
-    if (data.playerID && !socket.playerID) {
-      socket.playerID = data.playerID
-    }
-
-    socket.emit('game-rejoined', {
-      gameID: data.gameID
-    })
-  })
-
-  /**
    * Join/start a game
    * data required:
    * {
@@ -63,7 +41,8 @@ io.on('connection', function (socket) {
    */
   socket.on('join-game', function (data) {
 
-    console.log('\n' + getTimeStamp() + ' join-game received from player ' + data.playerID)
+    console.log('\n' + getTimeStamp() + ' join-game received ' +
+                '\n\t' + data.playerID)
     var tmpGameID = data.playerIDs.join('')
 
     if (data.playerID && !socket.playerID) {
@@ -80,42 +59,64 @@ io.on('connection', function (socket) {
     } else {
       games[tmpGameID].connectedPlayers++
     }
-
+    socket.games.push(games[tmpGameID].gameUUID)
     socket.join(games[tmpGameID].gameUUID)
-roomsCopy.push(games[tmpGameID].gameUUID)
-console.log('kk' + roomsCopy[0])
-    socket.emit('game-joined', {
-      gameID: games[tmpGameID].gameUUID,
-      state: data.playerCount === games[tmpGameID].connectedPlayers ? 'starting' : 'waiting',
-      playersNeeded: data.playerCount - games[tmpGameID].connectedPlayers
-    })
+    console.log('\n' + getTimeStamp() + ' ' + data.playerID + ' has joined ' +
+                '\n\t ' + games[tmpGameID].gameUUID)
 
     if (games[tmpGameID].connectedPlayers === games[tmpGameID].playerCount) {
-      socket.broadcast.to(games[tmpGameID].gameUUID).emit('game-started', {
+      socket.to(games[tmpGameID].gameUUID).emit('game-started', {
         gameID: games[tmpGameID].gameUUID
       })
-
+      socket.emit('game-started', {
+        gameID: games[tmpGameID].gameUUID
+      })
       delete games[tmpGameID]
     }
   })
 
-  /**
-   * Send a new step count to all other players in a game
-   * data required:
-   * {
-   *   gameID: string,
-   *   newStepCount: number
-   *   playerID: string
-   * }
-   */
+  socket.on('rejoin-game', function (data) {
+    console.log('\n' + getTimeStamp() + ' rejoin-game received ' +
+                '\n\tgameID: ' + data.gameID +
+                '\n\tplayerID: ' + data.playerID)
+
+    socket.join(data.gameID)
+    if (data.playerID && !socket.playerID) {
+      socket.playerID = data.playerID
+    }
+    socket.to(data.gameID).emit('player-reconnected', {
+      playerID: data.playerID,
+      gameID: data.gameID
+    })
+    socket.emit('game-rejoined', {
+      gameID: data.gameID
+    })
+  })
+
+  socket.on('last-score-update', function (data) {
+    //stick this in a separate function
+    socket.emit('score-updated', {
+      gameID: data.gameID,
+      newScore: data.lastScoreUpdate,
+      playerID: data.playerID
+    })
+    console.log('\n' + getTimeStamp() + ' update-score received' +
+                '\n\tgameID: ' + data.gameID +
+                '\n\tplayerID: ' + data.playerID +
+                '\n\tnewScore: ' + data.newScore)
+  })
+
   socket.on('update-score', function (data) {
+    //stick this in a separate function
     socket.to(data.gameID).emit('score-updated', {
       gameID: data.gameID,
       newScore: data.newScore,
       playerID: data.playerID
     })
-    console.log('\n' + getTimeStamp() + '\nplayerID: ' + data.playerID + '\ngameID: ' +
-                data.gameID + '\score: ' + data.newScore)
+    console.log('\n' + getTimeStamp() + ' update-score received' +
+                '\n\tgameID: ' + data.gameID +
+                '\n\tplayerID: ' + data.playerID +
+                '\n\tnewScore: ' + data.newScore)
   })
 
   /**
@@ -160,14 +161,17 @@ console.log('kk' + roomsCopy[0])
    * data required: none
    */
   socket.on('disconnect', function() {
-    console.log('\n' + getTimeStamp() + ' player disconnected: ' + socket.playerID)
-    console.log('player disconnected from all these games ' + roomsCopy.count)
-console.log(roomsCopy[0])
-
-      socket.to(roomsCopy[0]).emit('player-disconnected', {
-        playerID: socket.playerID,
-        gameID: roomsCopy[0]
-      })
+    console.log('\n' + getTimeStamp() + ' player disconnected (this message could be delayed)' +
+                '\n\tsid: ' + socket.id +
+                '\n\tplayerID: ' + socket.playerID +
+                '\n\tleaving games:')
+    for (game in socket.games) {
+      console.log('\t' + socket.games[game])
+      socket.to(socket.games[game]).emit('player-disconnected', {
+          playerID: socket.playerID,
+          gameID: socket.games[game]
+        })
+      }
   })
 })
 
