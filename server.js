@@ -12,6 +12,7 @@ httpServer.globalAgent.maxSockets = 1000
 
 app.route('/')
   .get(function (req, res) {
+    console.log('hit the web url');
     res.sendFile(path.join(__dirname, './views/index.html'))
   })
 
