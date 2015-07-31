@@ -1,0 +1,255 @@
+2015-07-30T00:36:10.019919374 0.107786s notice: Recursively removing directory /home/deploy/walkoff-server/rethinkdb_data/tmp
+2015-07-30T00:36:10.024740120 0.112605s notice: Initializing directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T00:36:10.025375589 0.113241s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/deploy/walkoff-server/rethinkdb_data' did not already exist or is empty.)
+2015-07-30T00:36:10.025510134 0.113375s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T00:36:10.031688776 0.119557s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T00:36:10.031970989 0.119836s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T00:36:10.153455601 0.241321s info: Automatically using cache size of 100 MB
+2015-07-30T00:36:10.154565380 0.242430s warn: Cache size does not leave much memory for server and query overhead (available memory: 297 MB).
+2015-07-30T00:36:10.155031090 0.242896s warn: Cache size is very low and may impact performance.
+2015-07-30T00:36:10.156785567 0.244650s notice: Listening for intracluster connections on port 29015
+2015-07-30T00:36:10.160514654 0.248380s notice: Listening for client driver connections on port 28015
+2015-07-30T00:36:10.160927209 0.248792s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T00:36:10.160928907 0.248793s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T00:36:10.160930686 0.248795s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T00:36:10.160932449 0.248797s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T00:37:33.107439287 83.195305s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T00:37:33.107799270 83.195664s notice: Shutting down client connections...
+2015-07-30T00:37:33.110220857 83.198087s notice: All client connections closed.
+2015-07-30T00:37:33.110227203 83.198097s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T00:37:33.113034227 83.200900s notice: Storage engine shut down.
+2015-07-30T00:38:24.511573233 0.009824s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T00:38:24.515334083 0.013587s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T00:38:24.515634776 0.013885s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T00:38:24.549149410 0.047400s info: Automatically using cache size of 100 MB
+2015-07-30T00:38:24.550145274 0.048396s warn: Cache size does not leave much memory for server and query overhead (available memory: 297 MB).
+2015-07-30T00:38:24.550153049 0.048403s warn: Cache size is very low and may impact performance.
+2015-07-30T00:38:24.552209673 0.050460s notice: Listening for intracluster connections on port 29015
+2015-07-30T00:38:24.555454890 0.053705s notice: Listening for client driver connections on port 28015
+2015-07-30T00:38:24.555842994 0.054093s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T00:38:24.555844997 0.054094s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T00:38:24.555848312 0.054098s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T00:38:24.555851495 0.054101s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T00:38:33.486500391 8.984751s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T00:38:33.486642101 8.984892s notice: Shutting down client connections...
+2015-07-30T00:38:33.486832373 8.985082s notice: All client connections closed.
+2015-07-30T00:38:33.486835270 8.985085s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T00:38:33.487430749 8.985681s notice: Storage engine shut down.
+2015-07-30T00:39:47.683745741 0.096717s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T00:39:47.687163000 0.100136s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T00:39:47.687432223 0.100403s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T00:39:47.717144232 0.130115s info: Automatically using cache size of 100 MB
+2015-07-30T00:39:47.718113944 0.131085s warn: Cache size does not leave much memory for server and query overhead (available memory: 297 MB).
+2015-07-30T00:39:47.718128157 0.131098s warn: Cache size is very low and may impact performance.
+2015-07-30T00:39:47.720217063 0.133188s notice: Listening for intracluster connections on port 29015
+2015-07-30T00:39:47.722786960 0.135757s notice: Listening for client driver connections on port 28015
+2015-07-30T00:39:47.723134523 0.136105s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T00:39:47.723136109 0.136106s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T00:39:47.723139264 0.136109s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T00:39:47.723141911 0.136112s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T00:49:37.084272139 589.497243s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T00:49:37.084516461 589.497487s notice: Shutting down client connections...
+2015-07-30T00:49:37.084885572 589.497856s notice: All client connections closed.
+2015-07-30T00:49:37.084889311 589.497859s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T00:49:37.086867735 589.499838s notice: Storage engine shut down.
+2015-07-30T00:57:42.803008092 0.077111s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T00:57:42.807684239 0.081790s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T00:57:42.807956251 0.082059s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T00:57:42.832936205 0.107039s info: Automatically using cache size of 100 MB
+2015-07-30T00:57:42.833867501 0.107970s warn: Cache size does not leave much memory for server and query overhead (available memory: 294 MB).
+2015-07-30T00:57:42.834337286 0.108440s warn: Cache size is very low and may impact performance.
+2015-07-30T00:57:42.835863965 0.109966s notice: Listening for intracluster connections on port 29015
+2015-07-30T00:57:42.839144625 0.113247s notice: Listening for client driver connections on port 28015
+2015-07-30T00:57:42.839533163 0.113636s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T00:57:42.839535474 0.113637s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T00:57:42.839539325 0.113641s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T00:57:42.839542356 0.113644s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T00:57:46.690453828 3.964557s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-30T00:57:51.194873377 8.468977s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-30T00:58:42.512398336 59.786501s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T00:58:42.512561325 59.786664s notice: Shutting down client connections...
+2015-07-30T00:58:42.512777105 59.786879s notice: All client connections closed.
+2015-07-30T00:58:42.512780790 59.786883s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T00:58:42.513705970 59.787808s notice: Storage engine shut down.
+2015-07-30T00:58:48.078853622 0.072276s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T00:58:48.081464910 0.074891s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T00:58:48.081686535 0.075109s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T00:58:48.092917914 0.086340s info: Automatically using cache size of 100 MB
+2015-07-30T00:58:48.093269339 0.086692s warn: Cache size does not leave much memory for server and query overhead (available memory: 294 MB).
+2015-07-30T00:58:48.093273447 0.086696s warn: Cache size is very low and may impact performance.
+2015-07-30T00:58:48.164407891 0.157831s notice: Listening for intracluster connections on port 29015
+2015-07-30T00:58:48.166283440 0.159706s notice: Listening for client driver connections on port 28015
+2015-07-30T00:58:48.166511351 0.159934s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T00:58:48.174682667 0.168106s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, 162.243.138.39, ::1, fe80::601:60ff:fea5:be01%2
+2015-07-30T00:58:48.175233976 0.168656s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T00:58:51.201375329 3.194799s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-30T00:58:54.023421142 6.016844s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-30T00:58:59.601583680 11.595007s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-30T00:59:03.627867412 15.621290s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-30T00:59:23.568490967 35.561914s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T00:59:23.568752562 35.562175s notice: Shutting down client connections...
+2015-07-30T00:59:23.568923872 35.562346s notice: All client connections closed.
+2015-07-30T00:59:23.568983340 35.562406s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T00:59:23.570049705 35.563472s notice: Storage engine shut down.
+2015-07-30T01:01:30.130410814 0.011815s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T01:01:30.137340819 0.018749s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T01:01:30.138189012 0.019594s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T01:01:30.198175274 0.079580s info: Automatically using cache size of 100 MB
+2015-07-30T01:01:30.200184425 0.081590s warn: Cache size does not leave much memory for server and query overhead (available memory: 293 MB).
+2015-07-30T01:01:30.201426805 0.082831s warn: Cache size is very low and may impact performance.
+2015-07-30T01:01:30.204650232 0.086055s notice: Listening for intracluster connections on port 29015
+2015-07-30T01:01:30.208319668 0.089724s notice: Listening for client driver connections on port 28015
+2015-07-30T01:01:30.209592090 0.090997s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T01:01:30.209595072 0.090999s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T01:01:30.209599638 0.091003s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T01:01:30.209602944 0.091007s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T01:01:37.387907325 7.269312s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-30T01:01:40.295317813 10.176722s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T01:01:40.295609761 10.177014s notice: Shutting down client connections...
+2015-07-30T01:01:40.295767604 10.177172s notice: All client connections closed.
+2015-07-30T01:01:40.295871354 10.177275s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T01:01:40.296927567 10.178332s notice: Storage engine shut down.
+2015-07-30T01:03:18.094664711 0.007437s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T01:03:18.098277302 0.011053s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T01:03:18.098611071 0.011383s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T01:03:18.127220280 0.039993s info: Automatically using cache size of 100 MB
+2015-07-30T01:03:18.128050812 0.040823s warn: Cache size does not leave much memory for server and query overhead (available memory: 293 MB).
+2015-07-30T01:03:18.128470717 0.041243s warn: Cache size is very low and may impact performance.
+2015-07-30T01:03:18.129750375 0.042523s notice: Listening for intracluster connections on port 29015
+2015-07-30T01:03:18.132279826 0.045052s notice: Listening for client driver connections on port 28015
+2015-07-30T01:03:18.132573689 0.045346s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T01:03:18.132575162 0.045347s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T01:03:18.132578051 0.045350s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T01:03:18.132580842 0.045353s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T01:03:20.676323314 2.589096s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T01:03:20.677774161 2.590546s notice: Shutting down client connections...
+2015-07-30T01:03:20.678125665 2.590898s notice: All client connections closed.
+2015-07-30T01:03:20.678397145 2.591170s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T01:03:20.679171183 2.591943s notice: Storage engine shut down.
+2015-07-30T01:03:24.214381518 0.072487s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T01:03:24.217283488 0.075390s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T01:03:24.217485960 0.075591s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T01:03:24.250863757 0.108969s info: Automatically using cache size of 100 MB
+2015-07-30T01:03:24.251975288 0.110081s warn: Cache size does not leave much memory for server and query overhead (available memory: 293 MB).
+2015-07-30T01:03:24.252465899 0.110571s warn: Cache size is very low and may impact performance.
+2015-07-30T01:03:24.260290195 0.118396s notice: Listening for intracluster connections on port 29015
+2015-07-30T01:03:24.265278150 0.123384s notice: Listening for client driver connections on port 28015
+2015-07-30T01:03:24.265628404 0.123734s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T01:03:24.268639969 0.126745s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, 162.243.138.39, ::1, fe80::601:60ff:fea5:be01%2
+2015-07-30T01:03:24.268953444 0.127059s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T01:03:28.797180890 4.655287s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-30T11:41:04.298675006 0.112725s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T11:41:04.307105930 0.121158s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T11:41:04.307417940 0.121466s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T11:41:04.336412583 0.150461s info: Automatically using cache size of 100 MB
+2015-07-30T11:41:04.338394766 0.152443s warn: Cache size does not leave much memory for server and query overhead (available memory: 202 MB).
+2015-07-30T11:41:04.338898847 0.152947s warn: Cache size is very low and may impact performance.
+2015-07-30T11:41:04.340910527 0.154959s notice: Listening for intracluster connections on port 29015
+2015-07-30T11:41:04.344707393 0.158756s notice: Listening for client driver connections on port 28015
+2015-07-30T11:41:04.345119142 0.159168s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T11:41:04.345121720 0.159169s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T11:41:04.345125033 0.159173s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T11:41:04.345128209 0.159176s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T11:41:51.796136710 47.610186s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T11:41:51.796366177 47.610415s notice: Shutting down client connections...
+2015-07-30T11:41:51.796737217 47.610786s notice: All client connections closed.
+2015-07-30T11:41:51.796744244 47.610792s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T11:41:51.798975565 47.613024s notice: Storage engine shut down.
+2015-07-30T11:42:07.322337513 0.097805s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T11:42:07.326763645 0.102235s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T11:42:07.327060501 0.102527s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T11:42:07.346871276 0.122338s info: Automatically using cache size of 100 MB
+2015-07-30T11:42:07.347492573 0.122959s warn: Cache size does not leave much memory for server and query overhead (available memory: 203 MB).
+2015-07-30T11:42:07.347501313 0.122967s warn: Cache size is very low and may impact performance.
+2015-07-30T11:42:07.349257944 0.124725s notice: Listening for intracluster connections on port 29015
+2015-07-30T11:42:07.351673998 0.127141s notice: Listening for client driver connections on port 28015
+2015-07-30T11:42:07.351990435 0.127457s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T11:42:07.351992925 0.127459s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T11:42:07.351996198 0.127462s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T11:42:07.351999141 0.127465s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T11:42:13.400953468 6.176421s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T11:42:13.401433982 6.176901s notice: Shutting down client connections...
+2015-07-30T11:42:13.401816885 6.177283s notice: All client connections closed.
+2015-07-30T11:42:13.401828165 6.177294s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T11:42:13.402717032 6.178183s notice: Storage engine shut down.
+2015-07-30T11:53:58.712048934 0.102225s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T11:53:58.716422128 0.106601s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T11:53:58.716690122 0.106866s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T11:53:58.737978170 0.128155s info: Automatically using cache size of 100 MB
+2015-07-30T11:53:58.738893034 0.129069s warn: Cache size does not leave much memory for server and query overhead (available memory: 201 MB).
+2015-07-30T11:53:58.739213076 0.129389s warn: Cache size is very low and may impact performance.
+2015-07-30T11:53:58.740625854 0.130802s notice: Listening for intracluster connections on port 29015
+2015-07-30T11:53:58.743987878 0.134164s notice: Listening for client driver connections on port 28015
+2015-07-30T11:53:58.744456623 0.134633s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T11:53:58.744458893 0.134634s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T11:53:58.744462763 0.134638s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T11:53:58.744465959 0.134641s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T11:54:41.685299145 43.075476s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T11:54:41.685554085 43.075730s notice: Shutting down client connections...
+2015-07-30T11:54:41.685859615 43.076037s notice: All client connections closed.
+2015-07-30T11:54:41.685867195 43.076043s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T11:54:41.687108908 43.077285s notice: Storage engine shut down.
+2015-07-30T12:05:32.817586886 0.008212s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T12:05:32.822175183 0.012803s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T12:05:32.822428248 0.013053s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T12:05:32.850211049 0.040837s info: Automatically using cache size of 100 MB
+2015-07-30T12:05:32.851230263 0.041855s warn: Cache size does not leave much memory for server and query overhead (available memory: 200 MB).
+2015-07-30T12:05:32.851659617 0.042284s warn: Cache size is very low and may impact performance.
+2015-07-30T12:05:32.853520268 0.044145s notice: Listening for intracluster connections on port 29015
+2015-07-30T12:05:32.856710592 0.047335s notice: Listening for client driver connections on port 28015
+2015-07-30T12:05:32.857251363 0.047876s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T12:05:32.857253730 0.047878s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T12:05:32.857257292 0.047881s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T12:05:32.857260432 0.047885s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T12:06:18.666031107 45.856657s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T12:06:18.666319517 45.856944s notice: Shutting down client connections...
+2015-07-30T12:06:18.666691640 45.857316s notice: All client connections closed.
+2015-07-30T12:06:18.666696127 45.857320s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T12:06:18.668738048 45.859363s notice: Storage engine shut down.
+2015-07-30T12:11:46.636167140 0.008713s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T12:11:46.641722455 0.014273s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T12:11:46.642025133 0.014571s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T12:11:46.673133278 0.045680s info: Automatically using cache size of 100 MB
+2015-07-30T12:11:46.674163938 0.046710s warn: Cache size does not leave much memory for server and query overhead (available memory: 195 MB).
+2015-07-30T12:11:46.674677183 0.047223s warn: Cache size is very low and may impact performance.
+2015-07-30T12:11:46.676539356 0.049085s notice: Listening for intracluster connections on port 29015
+2015-07-30T12:11:46.680439045 0.052984s notice: Listening for client driver connections on port 28015
+2015-07-30T12:11:46.680959515 0.053505s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T12:11:46.680961855 0.053507s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, ::1
+2015-07-30T12:11:46.680965165 0.053510s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-07-30T12:11:46.680968018 0.053513s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T12:12:26.777860942 40.150407s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2015-07-30T12:12:26.778048565 40.150594s notice: Shutting down client connections...
+2015-07-30T12:12:26.778283219 40.150829s notice: All client connections closed.
+2015-07-30T12:12:26.778287145 40.150832s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T12:12:26.779405809 40.151951s notice: Storage engine shut down.
+2015-07-30T12:12:30.339498379 0.098794s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T12:12:30.343899934 0.103198s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T12:12:30.344175172 0.103470s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T12:12:30.363985761 0.123281s info: Automatically using cache size of 100 MB
+2015-07-30T12:12:30.364824954 0.124120s warn: Cache size does not leave much memory for server and query overhead (available memory: 195 MB).
+2015-07-30T12:12:30.364954051 0.124249s warn: Cache size is very low and may impact performance.
+2015-07-30T12:12:30.462076829 0.221372s notice: Listening for intracluster connections on port 29015
+2015-07-30T12:12:30.464978865 0.224274s notice: Listening for client driver connections on port 28015
+2015-07-30T12:12:30.465423071 0.224718s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T12:12:30.535144338 0.294439s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, 162.243.138.39, ::1, fe80::601:60ff:fea5:be01%2
+2015-07-30T12:12:30.535502311 0.294797s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T12:36:33.629220590 1443.388517s notice: Someone asked for the nonwhitelisted file "/Ringing.at.your.dorbell!".  If this should be accessible, add it to the static web assets.
+2015-07-30T12:36:34.202273026 1443.961569s notice: Someone asked for the nonwhitelisted file "/Diagnostics.asp".  If this should be accessible, add it to the static web assets.
+2015-07-30T12:38:48.386561404 1578.145857s notice: Server got SIGTERM from pid 25356, uid 1000; shutting down...
+2015-07-30T12:38:48.387177478 1578.146472s notice: Shutting down client connections...
+2015-07-30T12:38:48.387474164 1578.146769s notice: All client connections closed.
+2015-07-30T12:38:48.387644231 1578.146939s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-07-30T12:38:48.388807368 1578.148102s notice: Storage engine shut down.
+2015-07-30T12:40:02.498984948 0.080561s notice: Running rethinkdb 2.0.4~0trusty (GCC 4.8.2)...
+2015-07-30T12:40:02.503461312 0.085040s notice: Running on Linux 3.13.0-52-generic x86_64
+2015-07-30T12:40:02.503544170 0.085120s notice: Loading data from directory /home/deploy/walkoff-server/rethinkdb_data
+2015-07-30T12:40:02.540914084 0.122490s info: Automatically using cache size of 100 MB
+2015-07-30T12:40:02.542206558 0.123782s warn: Cache size does not leave much memory for server and query overhead (available memory: 291 MB).
+2015-07-30T12:40:02.542355238 0.123931s warn: Cache size is very low and may impact performance.
+2015-07-30T12:40:02.548205214 0.129781s notice: Listening for intracluster connections on port 29015
+2015-07-30T12:40:02.551252058 0.132828s notice: Listening for client driver connections on port 28015
+2015-07-30T12:40:02.551517459 0.133093s notice: Listening for administrative HTTP connections on port 8080
+2015-07-30T12:40:02.694351669 0.275928s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, 162.243.138.39, ::1, fe80::601:60ff:fea5:be01%2
+2015-07-30T12:40:02.694503829 0.276080s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-07-30T17:34:19.131714710 17656.713292s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.

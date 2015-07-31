@@ -1,5 +1,6 @@
 var express = require('express'),
   httpServer = require('http'),
+  rethink = require('rethinkdb'),
   path = require('path'),
   app = express(),
   server = httpServer.createServer(app),
@@ -15,6 +16,65 @@ app.route('/')
     console.log('hit the web url');
     res.sendFile(path.join(__dirname, './views/index.html'))
   })
+
+var connection
+var walkoff
+
+rethink.connect({
+  host: 'localhost',
+  port: 28015,
+}, function(err, conn) {
+  if (err) {
+   throw new Error('Error connection to rethinkdb: ', err)
+  }
+
+  connection = conn
+  createDatabase()
+})
+
+
+function createDatabase() {
+  rethink.dbList().run(connection, function(err, dbs) {
+    if (err) {
+      throw new Error('Error getting the list of databases: ', err)
+    }
+
+    if (dbs.indexOf('walkoff') === -1) {
+      rethink.dbCreate('walkoff').run(connection, function(err, response) {
+      console.log('created walkoff database')
+
+      })
+    }
+    walkoff = rethink.db('walkoff')
+    createTable()	
+  })
+}
+
+function createTable() {
+  walkoff.tableList().run(connection, function(err, tables) {
+    if(err) {
+      throw new Error('error getting the list of databases: ', err)
+    }
+
+    if (tables.indexOf('games') === -1) {
+      walkoff.tableCreate('games').run(connection, function(err, response) {
+        if (err) {
+          throw new Error('there was a problem creating the games table: ', err)  
+        }
+        console.log('created games table')
+      })    
+    } 
+   
+    if (tables.indexOf('players') === -1) {
+      walkoff.tableCreate('players').run(connection, function(err, response) {
+        if (err) {
+          throw new Error('there was a problem creating the games table: ', err)  
+        }
+        console.log('created players table')
+      })    
+    }
+  })
+}
 
 io.on('connection', function (socket) {
 
@@ -72,9 +132,12 @@ io.on('connection', function (socket) {
       socket.emit('game-started', {
         gameID: games[tmpGameID].gameUUID
       })
+
+walkoff.table('games').insert(
+  { gameID: games[tmpGameID] }).run(connection, function(err, response){})
       delete games[tmpGameID]
     }
-  })
+  }) 
 
   socket.on('rejoin-game', function (data) {
     console.log('\n' + getTimeStamp() + ' rejoin-game received ' +
@@ -183,3 +246,4 @@ function getTimeStamp() {
   var date = new Date()
   return date.getHours() + ':' + date.getMinutes() +':' + date.getSeconds()
 }
+
