@@ -133,10 +133,11 @@ io.on('connection', function (socket) {
         gameID: games[tmpGameID].gameUUID
       })
 
-walkoff.table('games').insert(
-  { gameID: games[tmpGameID] }).run(connection, function(err, response){})
+      walkoff.table('games').insert(
+        { gameID: games[tmpGameID].gameUUID,
+          testObject: "kk"  }).run(connection, function(err, response){})
       delete games[tmpGameID]
-    }
+    }  
   }) 
 
   socket.on('rejoin-game', function (data) {

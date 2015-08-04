@@ -253,3 +253,15 @@
 2015-07-30T12:40:02.694351669 0.275928s notice: Listening on addresses: 127.0.0.1, 127.0.1.1, 162.243.138.39, ::1, fe80::601:60ff:fea5:be01%2
 2015-07-30T12:40:02.694503829 0.276080s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
 2015-07-30T17:34:19.131714710 17656.713292s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-31T09:33:10.805188927 75188.386768s notice: Someone asked for the nonwhitelisted file "/manager/html".  If this should be accessible, add it to the static web assets.
+2015-07-31T14:01:54.382706805 91311.964284s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-31T14:11:03.528997510 91861.110574s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-07-31T14:11:06.821302108 91864.402879s notice: Someone asked for the nonwhitelisted file "/rethink/".  If this should be accessible, add it to the static web assets.
+2015-08-01T21:50:16.266552657 205813.848130s notice: Someone asked for the nonwhitelisted file "/manager/html".  If this should be accessible, add it to the static web assets.
+2015-08-01T23:25:04.112157966 211501.693735s notice: Someone asked for the nonwhitelisted file "/manager/html".  If this should be accessible, add it to the static web assets.
+2015-08-02T12:48:10.610197254 259688.191775s notice: Someone asked for the nonwhitelisted file "/manager/html".  If this should be accessible, add it to the static web assets.
+2015-08-02T17:00:03.453110904 274801.034690s notice: Someone asked for the nonwhitelisted file "/robots.txt".  If this should be accessible, add it to the static web assets.
+2015-08-02T17:00:03.505766494 274801.087344s notice: Someone asked for the nonwhitelisted file "/sitemap.xml".  If this should be accessible, add it to the static web assets.
+2015-08-03T04:47:37.017457265 317254.599035s notice: Someone asked for the nonwhitelisted file "/robots.txt".  If this should be accessible, add it to the static web assets.
+2015-08-03T04:47:37.068920919 317254.650498s notice: Someone asked for the nonwhitelisted file "/sitemap.xml".  If this should be accessible, add it to the static web assets.
+2015-08-03T19:08:44.092782258 368921.674359s notice: Someone asked for the nonwhitelisted file "/manager/html".  If this should be accessible, add it to the static web assets.
