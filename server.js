@@ -32,7 +32,6 @@ rethink.connect({
   createDatabase()
 })
 
-
 function createDatabase() {
   rethink.dbList().run(connection, function(err, dbs) {
     if (err) {
@@ -46,7 +45,7 @@ function createDatabase() {
       })
     }
     walkoff = rethink.db('walkoff')
-    createTable()	
+    createTable()
   })
 }
 
@@ -59,19 +58,19 @@ function createTable() {
     if (tables.indexOf('games') === -1) {
       walkoff.tableCreate('games').run(connection, function(err, response) {
         if (err) {
-          throw new Error('there was a problem creating the games table: ', err)  
+          throw new Error('there was a problem creating the games table: ', err)
         }
         console.log('created games table')
-      })    
-    } 
-   
+      })
+    }
+
     if (tables.indexOf('players') === -1) {
       walkoff.tableCreate('players').run(connection, function(err, response) {
         if (err) {
-          throw new Error('there was a problem creating the games table: ', err)  
+          throw new Error('there was a problem creating the games table: ', err)
         }
         console.log('created players table')
-      })    
+      })
     }
   })
 }
@@ -104,6 +103,13 @@ io.on('connection', function (socket) {
 
     console.log('\n' + getTimeStamp() + ' join-game received ' +
                 '\n\t' + data.playerID)
+
+    walkoff.table('games').insert(
+      { players: data.playerIDs }).run(connection,
+        function(err, response){
+          console.log(response.generated_keys[0])
+        })
+
     var tmpGameID = data.playerIDs.join('')
 
     if (data.playerID && !socket.playerID) {
@@ -133,12 +139,10 @@ io.on('connection', function (socket) {
         gameID: games[tmpGameID].gameUUID
       })
 
-      walkoff.table('games').insert(
-        { gameID: games[tmpGameID].gameUUID,
-          testObject: "kk"  }).run(connection, function(err, response){})
+
       delete games[tmpGameID]
-    }  
-  }) 
+    }
+  })
 
   socket.on('rejoin-game', function (data) {
     console.log('\n' + getTimeStamp() + ' rejoin-game received ' +
@@ -247,4 +251,3 @@ function getTimeStamp() {
   var date = new Date()
   return date.getHours() + ':' + date.getMinutes() +':' + date.getSeconds()
 }
-

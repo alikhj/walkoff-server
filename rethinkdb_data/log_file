@@ -265,3 +265,90 @@
 2015-08-03T04:47:37.017457265 317254.599035s notice: Someone asked for the nonwhitelisted file "/robots.txt".  If this should be accessible, add it to the static web assets.
 2015-08-03T04:47:37.068920919 317254.650498s notice: Someone asked for the nonwhitelisted file "/sitemap.xml".  If this should be accessible, add it to the static web assets.
 2015-08-03T19:08:44.092782258 368921.674359s notice: Someone asked for the nonwhitelisted file "/manager/html".  If this should be accessible, add it to the static web assets.
+2015-08-03T21:57:02.341828000 0.348492s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-08-03T21:57:02.346319000 0.352979s notice: Running on Darwin 14.4.0 x86_64
+2015-08-03T21:57:02.346436000 0.353095s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-08-03T21:57:02.425392000 0.432050s info: Automatically using cache size of 385 MB
+2015-08-03T21:57:02.427302000 0.433960s notice: Listening for intracluster connections on port 29015
+2015-08-03T21:57:02.431273000 0.437931s notice: Listening for client driver connections on port 28015
+2015-08-03T21:57:02.431461000 0.438119s notice: Listening for administrative HTTP connections on port 8080
+2015-08-03T21:57:02.431464000 0.438121s notice: Listening on addresses: 127.0.0.1, ::1
+2015-08-03T21:57:02.431467000 0.438124s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-08-03T21:57:02.431468000 0.438125s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-08-03T21:57:17.738839000 15.746025s notice: Server got SIGINT from pid 25909, uid 501; shutting down...
+2015-08-03T21:57:17.739050000 15.746236s notice: Shutting down client connections...
+2015-08-03T21:57:17.739219000 15.746405s notice: All client connections closed.
+2015-08-03T21:57:17.739232000 15.746417s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-08-03T21:57:17.750748000 15.757934s notice: Storage engine shut down.
+2015-08-03T21:58:20.515516000 0.004535s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-08-03T21:58:20.519266000 0.008283s notice: Running on Darwin 14.4.0 x86_64
+2015-08-03T21:58:20.519315000 0.008330s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-08-03T21:58:20.603755000 0.092770s info: Automatically using cache size of 321 MB
+2015-08-03T21:58:20.604471000 0.093485s notice: Listening for intracluster connections on port 29015
+2015-08-03T21:58:20.606430000 0.095445s notice: Listening for client driver connections on port 28015
+2015-08-03T21:58:20.606632000 0.095647s notice: Listening for administrative HTTP connections on port 8080
+2015-08-03T21:58:20.606643000 0.095657s notice: Listening on addresses: 127.0.0.1, ::1
+2015-08-03T21:58:20.606651000 0.095665s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-08-03T21:58:20.606657000 0.095672s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-08-03T21:58:30.150920000 9.640265s notice: Server got SIGINT from pid 25909, uid 501; shutting down...
+2015-08-03T21:58:30.151124000 9.640468s notice: Shutting down client connections...
+2015-08-03T21:58:30.151278000 9.640623s notice: All client connections closed.
+2015-08-03T21:58:30.151288000 9.640632s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-08-03T21:58:30.159300000 9.648645s notice: Storage engine shut down.
+2015-08-03T22:09:13.977855000 0.194856s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-08-03T22:09:13.984565000 0.201563s notice: Running on Darwin 14.4.0 x86_64
+2015-08-03T22:09:13.984625000 0.201621s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-08-03T22:09:14.056287000 0.273283s info: Automatically using cache size of 100 MB
+2015-08-03T22:09:14.056302000 0.273297s warn: Cache size is very low and may impact performance.
+2015-08-03T22:09:14.057303000 0.274299s notice: Listening for intracluster connections on port 29015
+2015-08-03T22:09:14.059872000 0.276868s notice: Listening for client driver connections on port 28015
+2015-08-03T22:09:14.060113000 0.277108s notice: Listening for administrative HTTP connections on port 8080
+2015-08-03T22:09:14.060115000 0.277110s notice: Listening on addresses: 127.0.0.1, ::1
+2015-08-03T22:09:14.060124000 0.277119s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-08-03T22:09:14.060130000 0.277125s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-08-03T22:10:06.650214000 52.869059s notice: Server got SIGINT from pid 25909, uid 501; shutting down...
+2015-08-03T22:10:06.650452000 52.869296s notice: Shutting down client connections...
+2015-08-03T22:10:06.650623000 52.869468s notice: All client connections closed.
+2015-08-03T22:10:06.650635000 52.869479s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-08-03T22:10:06.659635000 52.878479s notice: Storage engine shut down.
+2015-08-03T22:15:22.983084000 0.368366s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-08-03T22:15:22.987706000 0.372985s notice: Running on Darwin 14.4.0 x86_64
+2015-08-03T22:15:22.987761000 0.373037s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-08-03T22:15:23.065500000 0.450777s info: Automatically using cache size of 100 MB
+2015-08-03T22:15:23.066102000 0.451379s notice: Listening for intracluster connections on port 29015
+2015-08-03T22:15:23.067769000 0.453045s notice: Listening for client driver connections on port 28015
+2015-08-03T22:15:23.067985000 0.453261s notice: Listening for administrative HTTP connections on port 8080
+2015-08-03T22:15:23.067989000 0.453265s notice: Listening on addresses: 127.0.0.1, ::1
+2015-08-03T22:15:23.067995000 0.453271s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-08-03T22:15:23.068002000 0.453278s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-08-03T22:16:13.600676000 50.987736s notice: Server got SIGINT from pid 25909, uid 501; shutting down...
+2015-08-03T22:16:13.600871000 50.987931s notice: Shutting down client connections...
+2015-08-03T22:16:13.601010000 50.988069s notice: All client connections closed.
+2015-08-03T22:16:13.601017000 50.988076s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-08-03T22:16:13.609352000 50.996411s notice: Storage engine shut down.
+2015-08-03T22:16:20.913589000 0.004156s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-08-03T22:16:20.917490000 0.008054s notice: Running on Darwin 14.4.0 x86_64
+2015-08-03T22:16:20.917540000 0.008102s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-08-03T22:16:20.981655000 0.072217s info: Automatically using cache size of 112 MB
+2015-08-03T22:16:20.983078000 0.073639s notice: Listening for intracluster connections on port 29015
+2015-08-03T22:16:20.984627000 0.075188s notice: Listening for client driver connections on port 28015
+2015-08-03T22:16:20.984781000 0.075343s notice: Listening for administrative HTTP connections on port 8080
+2015-08-03T22:16:20.986496000 0.077058s notice: Listening on addresses: 127.0.0.1, 192.168.0.11, ::1, fe80::1%1, fe80::22c9:d0ff:fe85:fd2d%4, fe80::8c84:41ff:fe7a:7244%9
+2015-08-03T22:16:20.986507000 0.077069s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-08-03T22:38:50.478958000 1349.617787s notice: Someone asked for the nonwhitelisted file "/manager/html".  If this should be accessible, add it to the static web assets.
+2015-08-03T22:43:59.703745000 1658.853668s notice: Server got SIGINT from pid 25909, uid 501; shutting down...
+2015-08-03T22:43:59.703958000 1658.853880s notice: Shutting down client connections...
+2015-08-03T22:43:59.704197000 1658.854119s notice: All client connections closed.
+2015-08-03T22:43:59.704206000 1658.854127s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-08-03T22:43:59.713747000 1658.863669s notice: Storage engine shut down.
+2015-08-03T22:44:14.369432000 0.274187s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-08-03T22:44:14.377041000 0.281792s notice: Running on Darwin 14.4.0 x86_64
+2015-08-03T22:44:14.377101000 0.281850s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-08-03T22:44:14.447519000 0.352268s info: Automatically using cache size of 100 MB
+2015-08-03T22:44:14.447549000 0.352298s warn: Cache size does not leave much memory for server and query overhead (available memory: 1042 MB).
+2015-08-03T22:44:14.447590000 0.352339s warn: Cache size is very low and may impact performance.
+2015-08-03T22:44:14.449029000 0.353777s notice: Listening for intracluster connections on port 29015
+2015-08-03T22:44:14.450718000 0.355467s notice: Listening for client driver connections on port 28015
+2015-08-03T22:44:14.451000000 0.355749s notice: Listening for administrative HTTP connections on port 8080
+2015-08-03T22:44:14.451840000 0.356589s notice: Listening on addresses: 127.0.0.1, 192.168.0.11, ::1, fe80::1%1, fe80::22c9:d0ff:fe85:fd2d%4, fe80::8c84:41ff:fe7a:7244%9
+2015-08-03T22:44:14.451861000 0.356610s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
