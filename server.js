@@ -7,6 +7,7 @@ var express = require('express'),
   io = require('socket.io').listen(server),
   crypto = require('crypto'),
   uuid = require('uuid'),
+  tmpGameIDs = {},
   games = {}
 
 httpServer.globalAgent.maxSockets = 1000
@@ -103,14 +104,34 @@ io.on('connection', function (socket) {
 
     console.log('\n' + getTimeStamp() + ' join-game received ' +
                 '\n\t' + data.playerID)
-
+ 
+    var tmpGameID = data.playerIDs.join('')
+    var playerID = data.playerID
+    walkoff.table('games').insert(
+      { id: tmpGameID,
+        playerCount: data.count,
+        playerID: data.playerID
+      }).run(connection, function(err, response) {
+        console.log(response + 'insert test')
+      })
+     
+    walkoff.table('games').get(tmpGameID).run(connection,
+     function(err, response) { console.log(response.id + 'response test') })
+//    if (walkoff.table('games').get(tmpGameID).id === 'null') {
+//      walkoff.table('games').insert(
+//        { id: tmpGameID,
+//          playerCount: data.count,
+//          playerID: data.playerID 
+//        }).run(connection, function(err, response){
+//          console.log(response + 'kk')
+//        })
+//    }    
     walkoff.table('games').insert(
       { players: data.playerIDs }).run(connection,
         function(err, response){
-          console.log(response.generated_keys[0])
-        })
-
-    var tmpGameID = data.playerIDs.join('')
+ 
+        console.log(response.generated_keys[0])
+      })
 
     if (data.playerID && !socket.playerID) {
       socket.playerID = data.playerID
