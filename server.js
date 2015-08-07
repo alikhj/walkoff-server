@@ -106,33 +106,40 @@ io.on('connection', function (socket) {
                 '\n\t' + data.playerID)
  
     var tmpGameID = data.playerIDs.join('')
-    var playerID = data.playerID
-    walkoff.table('games').insert(
-      { id: tmpGameID,
-        playerCount: data.count,
-        playerID: data.playerID
-      }).run(connection, function(err, response) {
-        console.log(response + 'insert test')
-      })
-     
-    walkoff.table('games').get(tmpGameID).run(connection,
-     function(err, response) { console.log(response.id + 'response test') })
-//    if (walkoff.table('games').get(tmpGameID).id === 'null') {
-//      walkoff.table('games').insert(
-//        { id: tmpGameID,
-//          playerCount: data.count,
-//          playerID: data.playerID 
-//        }).run(connection, function(err, response){
-//          console.log(response + 'kk')
-//        })
-//    }    
-    walkoff.table('games').insert(
-      { players: data.playerIDs }).run(connection,
-        function(err, response){
+    var gameID
+   
+    //walkoff.table('games').insert(game).run(connection, function(err, response) {})
  
-        console.log(response.generated_keys[0])
-      })
+    walkoff.table('games').filter(rethink.row("tmpGameID").eq(tmpGameID)).
+    run(connection, function(err, cursor) {
+      cursor.toArray(function(err, results) {
+        if (!results.length) {
+          console.log('there is no game with this tmpGameID, creating game...')
+          var game = {
+            tmpGameID: tmpGameID,
+	    playerCount: data.count,
+ 	    connectedCount: 1 
+          } 
+	  game[data.playerID] = 'a player object'
+	  walkoff.table('games').insert(game).run(connection, function(err, response) {
+          console.log('new game created with id: ' + response.generated_keys)
+	  gameID = response.generated_keys 
+          })
+        } else {
+	  console.log(results)
+	  walkoff.table('games').get(gameID).update({connectedCount: results.connectedCount++}).
+	    run(connection, function(err, response){})
+	  var newPlayer = {}
+	  newPlayer[data.PlayerID] = 'a player object'
+	  walkoff.table('games').get(gameID).update(newPlayer).
+	    run(connection, function(err, response){})		
+	    
+          }	
+	}
 
+      })
+    })
+  
     if (data.playerID && !socket.playerID) {
       socket.playerID = data.playerID
     }
