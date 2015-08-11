@@ -25,7 +25,7 @@ rethink.connect({
   host: 'localhost',
   port: 28015,
 }, function(err, conn) {
-  if (err) {
+  if(err) {
    throw new Error('Error connection to rethinkdb: ', err)
   }
 
@@ -35,11 +35,11 @@ rethink.connect({
 
 function createDatabase() {
   rethink.dbList().run(connection, function(err, dbs) {
-    if (err) {
+    if(err) {
       throw new Error('Error getting the list of databases: ', err)
     }
 
-    if (dbs.indexOf('walkoff') === -1) {
+    if(dbs.indexOf('walkoff') === -1) {
       rethink.dbCreate('walkoff').run(connection, function(err, response) {
       console.log('created walkoff database')
 
@@ -56,18 +56,18 @@ function createTable() {
       throw new Error('error getting the list of databases: ', err)
     }
 
-    if (tables.indexOf('games') === -1) {
+    if(tables.indexOf('games') === -1) {
       walkoff.tableCreate('games').run(connection, function(err, response) {
-        if (err) {
+        if(err) {
           throw new Error('there was a problem creating the games table: ', err)
         }
         console.log('created games table')
       })
     }
 
-    if (tables.indexOf('players') === -1) {
+    if(tables.indexOf('players') === -1) {
       walkoff.tableCreate('players').run(connection, function(err, response) {
-        if (err) {
+        if(err) {
           throw new Error('there was a problem creating the games table: ', err)
         }
         console.log('created players table')
@@ -102,83 +102,79 @@ io.on('connection', function (socket) {
    */
   socket.on('join-game', function (data) {
 
-    console.log('\n' + getTimeStamp() + ' join-game received ' +
-                '\n\t' + data.playerID)
- 
+    console.log('\n' + getTimeStamp() + ' join-game received from ' + data.playerID)
+
     var tmpGameID = data.playerIDs.join('')
     var gameID
-   
-    //walkoff.table('games').insert(game).run(connection, function(err, response) {})
- 
+
+    //check to see if a game with tmpGameID already exists
     walkoff.table('games').filter(rethink.row("tmpGameID").eq(tmpGameID)).
     run(connection, function(err, cursor) {
       cursor.toArray(function(err, results) {
-        if (!results.length) {
-          console.log('there is no game with this tmpGameID, creating game...')
+
+        //if the game doesn't exist, create the game object when the first
+        //player connects to the server
+        if(!results.length) {
+          console.log('\n' + getTimeStamp() + ' ' + tmpGameID +
+                      '\n\t no game with this tmpGameID exists, creating game...')
           var game = {
             tmpGameID: tmpGameID,
-	    playerCount: data.count,
- 	    connectedCount: 1 
-          } 
-	  game[data.playerID] = 'a player object'
-	  walkoff.table('games').insert(game).run(connection, function(err, response) {
-          console.log('new game created with id: ' + response.generated_keys)
-	  gameID = response.generated_keys 
+	          playerCount: data.count,
+          }
+
+          //add a player key-value, the key being the connected playerID
+	        game[data.playerID] = 'a player object'
+	        walkoff.table('games').insert(game).
+          run(connection, function(err, response) {
+            console.log('\n' + getTimeStamp() + ' ' + response.generated_keys +
+                        '\n\t new game created')
+
+            //declare gameID as rethink's id for the object
+            gameID = response.generated_keys
+            socket.join(gameID)
+            console.log('\n' + getTimeStamp() + ' ' + gameID +
+                        '\n\t player 1 is ' + data.playerID)
           })
+
+        //if a game does exist, add the player key-value until the number of
+        //connected players equals the player count
         } else {
-	  console.log(results)
-	  walkoff.table('games').get(gameID).update({connectedCount: results.connectedCount++}).
-	    run(connection, function(err, response){})
-	  var newPlayer = {}
-	  newPlayer[data.PlayerID] = 'a player object'
-	  walkoff.table('games').get(gameID).update(newPlayer).
-	    run(connection, function(err, response){})		
-	    
-          }	
-	}
+          var connectedCount = Object.keys(results[0]).length - 2
+          gameID = results[0].id
+      	  walkoff.table('games').
+      	  run(connection, function(err, response) {})
+      	  var newPlayer = {}
+      	  newPlayer[data.playerID] = 'a player object'
+      	  walkoff.table('games').get(gameID).update(newPlayer).
+      	  run(connection, function(err, response) {
+            socket.join(gameID)
+            console.log('\n' + getTimeStamp() + ' ' + gameID +
+                        '\n\t player ' + connectedCount + ' is: ' + data.playerID)
 
-      })
+          //once the number of connected players equals the player count,
+          //start the game and update tmpGameID to "" so the same set of players
+          //(ie the same tmpGameID) can be reused, if necessary
+          if(connectedCount === data.count) {
+            walkoff.table('games').get(gameID).update({tmpGameID: ""}).
+            run(connection, function(err, response) {})
+            console.log('\n' + getTimeStamp() + ' ' + gameID +
+                        '\n\t all players have joined, the game is starting...')
+            socket.to(gameID).emit('game-started', { gameID: gameID })
+            socket.emit('game-started', { gameID: gameID })
+            }
+          })
+        }
+	    })
     })
-  
-    if (data.playerID && !socket.playerID) {
-      socket.playerID = data.playerID
-    }
-
-    if (!games[tmpGameID]) {
-      games[tmpGameID] = {
-        gameUUID: uuid.v4(),
-        playerCount: data.playerIDs.length,
-        players: data.playerIDs,
-        connectedPlayers: 1
-      }
-    } else {
-      games[tmpGameID].connectedPlayers++
-    }
-    socket.games.push(games[tmpGameID].gameUUID)
-    socket.join(games[tmpGameID].gameUUID)
-    console.log('\n' + getTimeStamp() + ' ' + data.playerID + ' has joined ' +
-                '\n\t ' + games[tmpGameID].gameUUID)
-
-    if (games[tmpGameID].connectedPlayers === games[tmpGameID].playerCount) {
-      socket.to(games[tmpGameID].gameUUID).emit('game-started', {
-        gameID: games[tmpGameID].gameUUID
-      })
-      socket.emit('game-started', {
-        gameID: games[tmpGameID].gameUUID
-      })
-
-
-      delete games[tmpGameID]
-    }
   })
 
   socket.on('rejoin-game', function (data) {
     console.log('\n' + getTimeStamp() + ' rejoin-game received ' +
-                '\n\tgameID: ' + data.gameID +
-                '\n\tplayerID: ' + data.playerID)
+                '\n\t gameID: ' + data.gameID +
+                '\n\t playerID: ' + data.playerID)
 
     socket.join(data.gameID)
-    if (data.playerID && !socket.playerID) {
+    if(data.playerID && !socket.playerID) {
       socket.playerID = data.playerID
     }
     socket.to(data.gameID).emit('player-reconnected', {
