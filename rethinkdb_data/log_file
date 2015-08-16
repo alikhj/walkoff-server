@@ -404,3 +404,12 @@
 2015-08-10T23:06:33.198166000 0.445107s notice: Listening on addresses: 127.0.0.1, ::1
 2015-08-10T23:06:33.198168000 0.445109s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
 2015-08-10T23:06:33.198174000 0.445115s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-08-14T23:43:17.965097000 0.354427s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-08-14T23:43:17.973403000 0.362730s notice: Running on Darwin 14.4.0 x86_64
+2015-08-14T23:43:17.973456000 0.362780s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-08-14T23:43:18.067575000 0.456899s info: Automatically using cache size of 565 MB
+2015-08-14T23:43:18.069088000 0.458412s notice: Listening for intracluster connections on port 29015
+2015-08-14T23:43:18.070853000 0.460177s notice: Listening for client driver connections on port 28015
+2015-08-14T23:43:18.071130000 0.460454s notice: Listening for administrative HTTP connections on port 8080
+2015-08-14T23:43:18.073227000 0.462553s notice: Listening on addresses: 127.0.0.1, 192.168.0.11, ::1, fe80::1%1, fe80::2004:1aff:fe89:21fe%8, fe80::22c9:d0ff:fe85:fd2d%4
+2015-08-14T23:43:18.073258000 0.462582s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
