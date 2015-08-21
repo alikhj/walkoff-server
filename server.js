@@ -94,25 +94,34 @@ io.on('connection', function(socket) {
             ' updated with new sid in players table: ' +
             '\n\t sid: ' + socket.id)
           //check if player was in games before disconnection
-        var filter = {
-          players: {}
-        }
-        filter.players[data.playerID] = {}
-        walkoff.table('games').filter(filter).
+        var filter = {}
+        filter[data.playerID] = {}
+        walkoff.table('games').filter({players: filter}).
         run(connection, function(err, gamesCursor) {
           if (gamesCursor) {
             gamesCursor.toArray(function(err,
               gamesContainingPlayer) {
+
               for (var game in gamesContainingPlayer) {
+                var gameID =  gamesContainingPlayer[game].id
                 console.log('\n' + getTimeStamp() + ' ' +
                   data.playerID + '\n\t rejoining game: ' +
-                  '\n\t ' + gamesContainingPlayer[game].id
+                  '\n\t ' + gameID
                 )
-                socket.join(gamesContainingPlayer[game].id)
+                socket.join(gameID)
                   //send player gameID and players
-                socket.emit('game-rejoined', {
-                  gameID: gamesContainingPlayer[game].id,
-                  players: gamesContainingPlayer[game].players
+
+                rethink.do(walkoff.table('games').get(gameID).getField('players').keys(),
+  	            function(playerObjects) {
+  		            return walkoff.table('players').getAll(rethink.args(playerObjects)).
+  		            pluck(['alias', 'id']).coerceTo('array');
+  		          }).
+                run(connection, function(err, playersArray) {
+                  console.log('emitting game id: ' + gameID)
+                  socket.emit('game-rejoined', {
+                    gameID: gameID,
+                    players: playersArray
+                  })
                 })
               }
             })
@@ -133,7 +142,6 @@ io.on('connection', function(socket) {
             //update 'connected' to false
           walkoff.table('players').get(playerID).update({
             connected: false,
-            lastUpdate: rethink.now()
           }).
           run(connection, function(err, response) {
             console.log('\n' + getTimeStamp() + ' ' +
@@ -197,7 +205,6 @@ io.on('connection', function(socket) {
           }
           newGame.players[playerID] = {
             score: 0,
-            lastUpdate: rethink.now()
           }
           //insert the new game object into the db
           walkoff.table('games').insert(newGame).
@@ -222,7 +229,6 @@ io.on('connection', function(socket) {
           var players = {}
           players[playerID] = {
             score: 0,
-            lastUpdate: rethink.now()
           }
           walkoff.table('games').get(gameID).update({
             players: players
@@ -241,27 +247,27 @@ io.on('connection', function(socket) {
                 lastUpdate: rethink.now(),
                 tmpGameID: ''
               }
-	      rethink.do(walkoff.table('games').get(gameID).getField('players').keys(),
-	        function(playerObjects) {
-		  return walkoff.table('players').getAll(rethink.args(playerObjects)).
-		  pluck(['alias', 'id']).coerceTo('array');
-		}
-	      ).run(connection, function(err, playersArray) {
-	        walkoff.table('games').get(gameID).update(update).
+	            rethink.do(walkoff.table('games').get(gameID).getField('players').keys(),
+	            function(playerObjects) {
+		            return walkoff.table('players').getAll(rethink.args(playerObjects)).
+		            pluck(['alias', 'id']).coerceTo('array');
+		          }).
+              run(connection, function(err, playersArray) {
+	              walkoff.table('games').get(gameID).update(update).
                 run(connection, function(err, response) {
                   console.log('\n' + getTimeStamp() + ' ' + gameID +
                     '\n\t all players have joined, the game is starting...'
-                  )  
+                  )
                   socket.to(gameID).emit('game-started', {
                     gameID: gameID,
-		    players: playersArray
+		                players: playersArray
                   })
                   socket.emit('game-started', {
                     gameID: gameID,
-            	    players: playersArray
+            	      players: playersArray
                   })
                 })
-	      }) 
+	            })
             }
           })
         }
@@ -300,15 +306,13 @@ io.on('connection', function(socket) {
 
   socket.on('update-score', function(data) {
     //create object with updated keys
-    var update = {
-      lastUpdated: rethink.now()
-    }
+    var update = {}
     update[data.playerID] = {
-        lastUpdated: rethink.now(),
+        lastUpdate: rethink.now(),
         score: data.newScore
       }
     //save update to db before emitting to other players
-    walkoff.table('games').get(data.gameID).update(update).
+    walkoff.table('games').get(data.gameID).update({players: update}).
     run(connection, function(err, response) {
       socket.to(data.gameID).emit('score-updated', {
         gameID: data.gameID,

@@ -438,3 +438,4 @@
 2015-08-19T22:22:51.847542000 0.434338s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
 2015-08-19T22:23:56.024091000 64.614741s notice: Removing file /Users/alikhj/Documents/walkoff-server/rethinkdb_data/9d92b939-e6dd-4d0c-954c-e1f234f638fa
 2015-08-19T22:23:56.025684000 64.616335s notice: Removing file /Users/alikhj/Documents/walkoff-server/rethinkdb_data/ab5015f4-23df-42e6-be01-dc50acf324ab
+2015-08-21T00:39:24.318453000 19901.368229s notice: Someone asked for the nonwhitelisted file "/web-console/ServerInfo.jsp".  If this should be accessible, add it to the static web assets.
