@@ -82,6 +82,7 @@ io.on('connection', function(socket) {
             alias: data.alias,
             connected: true,
             sid: socket.id,
+	    games: []
           }).run(connection, function(err, response) {
             console.log('\n' + getTimeStamp() + ' ' + data.playerID +
               ' does not exist, was added to players table:' +
@@ -94,40 +95,28 @@ io.on('connection', function(socket) {
             ' updated with new sid in players table: ' +
             '\n\t sid: ' + socket.id)
           //check if player was in games before disconnection
-        var filter = {}
-        filter[data.playerID] = {}
-        walkoff.table('games').filter({players: filter}).
-        run(connection, function(err, gamesCursor) {
-          if (gamesCursor) {
-            gamesCursor.toArray(function(err,
-              gamesContainingPlayer) {
-
-              for (var game in gamesContainingPlayer) {
-                var gameID =  gamesContainingPlayer[game].id
-                console.log('\n' + getTimeStamp() + ' ' +
-                  data.playerID + '\n\t rejoining game: ' +
-                  '\n\t ' + gameID
+        walkoff.table('players').get(data.playerID).getField('games').do(
+	  function(currentGames) {
+ 	    return walkoff.table('games').getAll(rethink.args(currentGames)).
+	    coerceTo('array')
+	  }
+	).
+        run(connection, function(err, currentGames) {
+          if (currentGames) {
+            for (var i = 0; i < currentGames.length; i++) {
+              var gameID = currentGames[i].id
+              console.log('\n' + getTimeStamp() + ' ' +
+                data.playerID + '\n\t rejoining game: ' +
+                '\n\t ' + gameID
                 )
-                socket.join(gameID)
-                  //send player gameID and players
-
-                rethink.do(walkoff.table('games').get(gameID).getField('players').keys(),
-  	            function(playerObjects) {
-  		            return walkoff.table('players').getAll(rethink.args(playerObjects)).
-  		            pluck(['alias', 'id']).coerceTo('array');
-  		          }).
-                run(connection, function(err, playersArray) {
-                  console.log('emitting game id: ' + gameID)
-                  socket.emit('game-rejoined', {
-                    gameID: gameID,
-                    players: playersArray
-                  })
-                })
-              }
-            })
-          }
+              socket.join(gameID)
+	    }
+	    socket.emit('current-games', {
+	      currentGames: currentGames
+	    })
+	  }
         })
-      }
+      }  
     })
   })
 
@@ -186,6 +175,7 @@ io.on('connection', function(socket) {
     var tmpGameIDkey = data.playerIDs.join('')
     var gameID
     var playerID = data.playerID
+    var alias = data.alias
     //check to see if a game with tmpGameIDkey already exists
     walkoff.table('games').filter({
       tmpGameID: tmpGameIDkey
@@ -205,6 +195,7 @@ io.on('connection', function(socket) {
           }
           newGame.players[playerID] = {
             score: 0,
+	    alias: alias
           }
           //insert the new game object into the db
           walkoff.table('games').insert(newGame).
@@ -226,12 +217,13 @@ io.on('connection', function(socket) {
           //initialize gameID from game data pulled from the db
           gameID = game[0].id
           //create a new player object, used to update the db
-          var players = {}
-          players[playerID] = {
+          var playerUpdate = {}
+          playerUpdate[playerID] = {
             score: 0,
+	    alias: alias
           }
           walkoff.table('games').get(gameID).update({
-            players: players
+            players: playerUpdate
           }).run(connection, function(err, response) {
             //join the game after updating the db
             socket.join(gameID)
@@ -242,32 +234,40 @@ io.on('connection', function(socket) {
               ' is: ' + playerID
             )
             if (playerCount === data.count) {
-              var update = {
+              var gameUpdate = {
                 gameStarted: rethink.now(),
                 lastUpdate: rethink.now(),
                 tmpGameID: ''
               }
-	            rethink.do(walkoff.table('games').get(gameID).getField('players').keys(),
-	            function(playerObjects) {
-		            return walkoff.table('players').getAll(rethink.args(playerObjects)).
-		            pluck(['alias', 'id']).coerceTo('array');
-		          }).
-              run(connection, function(err, playersArray) {
-	              walkoff.table('games').get(gameID).update(update).
+	      //pull all the player keys from this game object
+	      rethink.do(walkoff.table('games').get(gameID).getField('players').keys(),
+	      function(playerObjects) {
+		//use the player keys to pull player objects from the players table
+	        return walkoff.table('players').getAll(rethink.args(playerObjects)).
+	        pluck(['alias', 'id']).coerceTo('array');
+	      }).run(connection, function(err, playersArray) {
+		//update the game object before starting the game
+	        walkoff.table('games').get(gameID).update(gameUpdate).
                 run(connection, function(err, response) {
                   console.log('\n' + getTimeStamp() + ' ' + gameID +
-                    '\n\t all players have joined, the game is starting...'
+                  '\n\t all players have joined, the game is starting...'
                   )
+		  //add gameID to all players object's game array
+		  walkoff.table('players').getAll(rethink.args(data.playerIDs)).update({
+		    games: rethink.row('games').append(gameID)}).
+		  run(connection, function(err, response) { 
+		  })
+		  //let everybody know the game has started
                   socket.to(gameID).emit('game-started', {
                     gameID: gameID,
-		                players: playersArray
+		    players: playersArray
                   })
                   socket.emit('game-started', {
                     gameID: gameID,
-            	      players: playersArray
+            	    players: playersArray
                   })
                 })
-	            })
+	      })
             }
           })
         }
