@@ -439,3 +439,28 @@
 2015-08-19T22:23:56.024091000 64.614741s notice: Removing file /Users/alikhj/Documents/walkoff-server/rethinkdb_data/9d92b939-e6dd-4d0c-954c-e1f234f638fa
 2015-08-19T22:23:56.025684000 64.616335s notice: Removing file /Users/alikhj/Documents/walkoff-server/rethinkdb_data/ab5015f4-23df-42e6-be01-dc50acf324ab
 2015-08-21T00:39:24.318453000 19901.368229s notice: Someone asked for the nonwhitelisted file "/web-console/ServerInfo.jsp".  If this should be accessible, add it to the static web assets.
+2015-09-02T22:40:57.003783000 0.337507s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-09-02T22:40:57.012605000 0.346326s notice: Running on Darwin 14.4.0 x86_64
+2015-09-02T22:40:57.012674000 0.346392s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-09-02T22:40:57.084698000 0.418416s info: Automatically using cache size of 609 MB
+2015-09-02T22:40:57.087416000 0.421133s notice: Listening for intracluster connections on port 29015
+2015-09-02T22:40:57.090663000 0.424381s notice: Listening for client driver connections on port 28015
+2015-09-02T22:40:57.090917000 0.424635s notice: Listening for administrative HTTP connections on port 8080
+2015-09-02T22:40:57.093531000 0.427249s notice: Listening on addresses: 127.0.0.1, 192.168.0.7, ::1, fe80::1%1, fe80::22c9:d0ff:fe85:fd2d%4, fe80::cc88:adff:fec8:ae38%8
+2015-09-02T22:40:57.093550000 0.427268s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-09-02T22:40:57.280870000 0.614588s notice: A newer version of the RethinkDB server is available: 2.1.2. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2015-09-02T23:51:47.605231000 4251.081357s notice: Server got SIGINT from pid 252, uid 501; shutting down...
+2015-09-02T23:51:47.605423000 4251.081550s notice: Shutting down client connections...
+2015-09-02T23:51:47.605753000 4251.081879s notice: All client connections closed.
+2015-09-02T23:51:47.605760000 4251.081886s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-09-02T23:51:47.620761000 4251.096887s notice: Storage engine shut down.
+2015-09-02T23:51:56.474992000 0.303082s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-09-02T23:51:56.482561000 0.310648s notice: Running on Darwin 14.4.0 x86_64
+2015-09-02T23:51:56.482628000 0.310712s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-09-02T23:51:56.564339000 0.392424s info: Automatically using cache size of 287 MB
+2015-09-02T23:51:56.566261000 0.394346s notice: Listening for intracluster connections on port 29015
+2015-09-02T23:51:56.568105000 0.396190s notice: Listening for client driver connections on port 28015
+2015-09-02T23:51:56.568449000 0.396533s notice: Listening for administrative HTTP connections on port 8080
+2015-09-02T23:51:56.570669000 0.398754s notice: Listening on addresses: 127.0.0.1, 192.168.0.7, ::1, fe80::1%1, fe80::22c9:d0ff:fe85:fd2d%4, fe80::cc88:adff:fec8:ae38%8
+2015-09-02T23:51:56.570689000 0.398773s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-09-02T23:51:56.716134000 0.544218s notice: A newer version of the RethinkDB server is available: 2.1.2. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
