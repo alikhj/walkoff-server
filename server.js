@@ -307,32 +307,3 @@ io.on('connection', function(socket) {
       console.log(getTimeStamp() + data.gameID +
         '\n\t update-score received from ' + data.playerID +
         '\n\t newScore: ' + data.newScore)
-    })
-  })
-  
-  socket.on('get-player-id', function() {
-      socket.emit('player-id', {
-        playerID: socket.playerID
-      })
-    })
-})
-
-server.listen(2000)
-console.info(getTimeStamp() +
-  ' walkoff-server started. Listening on port 2000.')
-
-function getTimeStamp() {
-  var date = new Date()
-  return '\n' + reformat(date.getHours()) + ':' + reformat(date.getMinutes()) + ':' +
-    reformat(date.getSeconds()) + ' '
-
-  function reformat(number) {
-    if (number < 10) {
-      var reformattedNumber = '0' + number
-      return reformattedNumber
-    }
-    else {
-      return number
-    }
-  }
-}
