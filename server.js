@@ -86,6 +86,7 @@ io.on('connection', function(socket) {
           id: socketData.playerID,
           alias: socketData.playerAlias,
           connected: true,
+          lastUpdate: rethink.now(),
           sid: socket.id,
           games: []
         }).run(connection, function(err, response) {
@@ -105,14 +106,14 @@ io.on('connection', function(socket) {
         )
         //check if player was in games before disconnection
         walkoff.table('players').get(socketData.playerID).getField('games').do(
-        function(existingGames) {
-          return walkoff.table('games').getAll(rethink.args(existingGames)).coerceTo('array')
-        }).run(connection, function(err, existingGamesArray) {
-          var competingPlayersArray = []
+        function(gameIDs) {
+          return walkoff.table('games').getAll(rethink.args(gameIDs)).coerceTo('array')
+        }).run(connection, function(err, gameData) {
+          var playerIDs = []
           //loop through game objects and join each game
-          if (existingGamesArray && existingGamesArray.length > 0) {
-            for (var i = 0; i < existingGamesArray.length; i++) {
-              var game = existingGamesArray[i]
+          if (gameData && gameData.length > 0) {
+            for (var i = 0; i < gameData.length; i++) {
+              var game = gameData[i]
               var gameID = game.id
               console.log(getTimeStamp() + socketData.playerID +
                 '\n\t rejoining game: ' + '\n\t ' + gameID
@@ -123,17 +124,20 @@ io.on('connection', function(socket) {
                 playerID: socketData.playerID,
                 gameID: gameID
               })
-              competingPlayersArray.concat(game.playerIDs)
-              console.log(competingPlayersArray + 'asd')
-            }
-            walkoff.table('players').getAll(rethink.args(competingPlayersArray)).
+              playerIDs = playerIDs.concat(game.playerIDs)
+            } //end for
+            //only fire the code below if the player needs it
+            //ie, if the app was reopened and the data is needed
+            walkoff.table('players').getAll(rethink.args(playerIDs)).
             pluck('id', 'alias').distinct().
-            run(connection, function(err, competingPlayers) {
-              console.log('asd: ' + competingPlayersArray)
-            }) 
-            //emit the array of games to the player
-            socket.emit('join-games', { games: existingGamesArray })
-          }
+            run(connection, function(err, playerData) {
+              //emit game and player data to the player
+              socket.emit('all-data', {
+                gameData: gameData,
+                playerData: playerData
+              })
+            })
+          } //end if
           else {
             console.log(getTimeStamp() + socketData.playerID + ' no existing games to join')
           }
@@ -183,15 +187,15 @@ io.on('connection', function(socket) {
       //connects to the server with a tmpGameIDKey
       if (newGameArray.length == 0) {
         console.log(getTimeStamp() + 'tmpGameIDKey is:' +
-	  '\n\t ' + tmpGameIDKey +
-          '\n\t no game with this tmpGameIDKey exists, creating game...'
+	       '\n\t ' + tmpGameIDKey +
+         '\n\t no game with this tmpGameIDKey exists, creating game...'
         )
         var newGameUpdate = {
-            tmpGameID: tmpGameIDKey,
-            playerCount: socketData.count,
-            playerData: {},
-            playerIDs: [playerID]
-          }
+          tmpGameID: tmpGameIDKey,
+          playerCount: socketData.count,
+          playerData: {},
+          playerIDs: [playerID]
+        }
         //insert player data object into newGameUpdate
         newGameUpdate.playerData[playerID] = {
           score: 0
@@ -208,7 +212,7 @@ io.on('connection', function(socket) {
           //create the room by joining it
           socket.join(gameID)
           console.log(getTimeStamp() + gameID +
-            '\n\t ' + playerID + ' is the first to join this game' 
+            '\n\t ' + playerID + ' is the first to join this game'
           )
         })
       } //if the game object already exists
@@ -247,16 +251,20 @@ io.on('connection', function(socket) {
               run(connection, function(err, playerData){
                 var gameData = gameChanges.changes[0].new_val
                 console.log(getTimeStamp() + gameID +
-                  '\n\t ' + playerID + ' is the last to join this game, the game is starting...'
+                  '\n\t ' + playerID +
+                  ' is the last to join this game, the game is starting...'
                 )
-	        socket.to(gameID).emit('game-started', {
+
+                socket.to(gameID).emit('game-started', {
                   gameData: gameData,
                   playerData: playerData
                 })
+
                 socket.emit('game-started', {
                   gameData: gameData,
                   playerData: playerData
                 })
+
               })
             })
           })
@@ -284,6 +292,7 @@ io.on('connection', function(socket) {
       }
       //save update to db before emitting to other players
     walkoff.table('games').get(data.gameID).update({
+      lastUpdate: rethink.now(),
       playerData: update
     }).run(connection, function(err, response) {
       socket.to(data.gameID).emit('score-updated', {
