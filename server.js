@@ -127,16 +127,21 @@ io.on('connection', function(socket) {
               playerIDs = playerIDs.concat(game.playerIDs)
             } //end for
             //only fire the code below if the player needs it
-            //ie, if the app was reopened and the data is needed
-            walkoff.table('players').getAll(rethink.args(playerIDs)).
-            pluck('id', 'alias').distinct().
-            run(connection, function(err, playerData) {
-              //emit game and player data to the player
-              socket.emit('all-data', {
-                gameData: gameData,
-                playerData: playerData
+            //ie, if the app was reopened and gamesCount = 0
+            if (socketData.clientGamesCount == 0) {
+              console.log(getTimeStamp() + socketData.playerID + 
+                '\n\t client has no gameData, emitting...'
+              )
+              walkoff.table('players').getAll(rethink.args(playerIDs)).
+              pluck('id', 'alias').distinct().
+              run(connection, function(err, playerData) {
+                //emit games and players data to the player
+                socket.emit('all-data', {
+                  gameData: gameData,
+                  playerData: playerData
+                })
               })
-            })
+            }
           } //end if
           else {
             console.log(getTimeStamp() + socketData.playerID + ' no existing games to join')
