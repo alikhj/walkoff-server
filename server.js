@@ -1,8 +1,8 @@
 var express = require('express'),
   httpServer = require('http'),
-  rethink = require('rethinkdb'),
   path = require('path'),
   app = express(),
+  rethink = require('rethinkdb'),
   server = httpServer.createServer(app),
   io = require('socket.io').listen(server),
   crypto = require('crypto'),
@@ -17,79 +17,27 @@ app.route('/').get(function(req, res) {
   res.sendFile(path.join(__dirname, './views/index.html'))
 })
 
-var connection
-var walkoff
-
-rethink.connect({
-  host: 'localhost',
-  port: 28015,
-}, function(err, conn) {
-  if (err) {
-    throw new Error(getTimeStamp() + 'cannot connect to rethinkdb: ', err)
-  }
-  connection = conn
-  createDatabase()
-})
-
-function createDatabase() {
-  rethink.dbList().run(connection, function(err, dbs) {
-    if (err) {
-      throw new Error(getTimeStamp() +
-        'error getting the list of databases: ', err)
-    }
-    if (dbs.indexOf('walkoff') === -1) {
-      rethink.dbCreate('walkoff').run(connection, function(err, response) {
-        console.log('created walkoff database')
-      })
-    }
-    walkoff = rethink.db('walkoff')
-    createTables()
-  })
-}
-
-function createTables() {
-  walkoff.tableList().run(connection, function(err, tables) {
-    if (err) {
-      throw new Error(getTimeStamp() +
-        'error getting the list of databases: ', err)
-    }
-    createTableWithName('games')
-    createTableWithName('players')
-
-    function createTableWithName(tableName) {
-      if (tables.indexOf(tableName) === -1) {
-        walkoff.tableCreate(tableName).run(connection, function(err,
-          response) {
-          if (err) {
-            throw new Error(getTimeStamp() +
-              'error creating table with name: ' + tableName)
-          }
-          console.log('table created with name: ' + tableName)
-        })
-      }
-    }
-  })
-}
+var r = require('./setupDatabase')
 
 io.on('connection', function(socket) {
   console.log(getTimeStamp() + socket.id + ' connected')
 
   socket.on('player-connected', function(socketData) {
     //check if player exists, and update with new sid
-    walkoff.table('players').get(socketData.playerID).update({
+    r.db.table('players').get(socketData.playerID).update({
       sid: socket.id,
       connected: true
-    }).run(connection, function(err, response) {
+    }).run(r.connection, function(err, response) {
       //if player does not exist
       if (response.skipped == 1) {
-        walkoff.table('players').insert({
+        r.db.table('players').insert({
           id: socketData.playerID,
           alias: socketData.playerAlias,
           connected: true,
           lastUpdate: rethink.now(),
           sid: socket.id,
           games: []
-        }).run(connection, function(err, response) {
+        }).run(r.connection, function(err, response) {
           console.log(getTimeStamp() + socketData.playerID +
             ' does not exist, was added to players table:' +
             '\n\t id: ' + socketData.playerID + '\n\t sid: ' +socket.id
@@ -104,11 +52,11 @@ io.on('connection', function(socket) {
         console.log(getTimeStamp() + socketData.playerID +
           ' checking for existing games... '
         )
-        //check if player was in games before disconnection
-        walkoff.table('players').get(socketData.playerID).getField('games').do(
+        //check if player was in games before disr.connection
+        r.db.table('players').get(socketData.playerID).getField('games').do(
         function(gameIDs) {
-          return walkoff.table('games').getAll(rethink.args(gameIDs)).coerceTo('array')
-        }).run(connection, function(err, gameData) {
+          return r.db.table('games').getAll(rethink.args(gameIDs)).coerceTo('array')
+        }).run(r.connection, function(err, gameData) {
           var playerIDs = []
           //loop through game objects and join each game
           if (gameData && gameData.length > 0) {
@@ -129,12 +77,12 @@ io.on('connection', function(socket) {
             //only fire the code below if the player needs it
             //ie, if the app was reopened and gamesCount = 0
             if (socketData.clientGamesCount == 0) {
-              console.log(getTimeStamp() + socketData.playerID + 
-                '\n\t client has no gameData, emitting...'
+              console.log(getTimeStamp() + socketData.playerID +
+                '\n\t client has no local gameData, emitting...'
               )
-              walkoff.table('players').getAll(rethink.args(playerIDs)).
+              r.db.table('players').getAll(rethink.args(playerIDs)).
               pluck('id', 'alias').distinct().
-              run(connection, function(err, playerData) {
+              run(r.connection, function(err, playerData) {
                 //emit games and players data to the player
                 socket.emit('all-data', {
                   gameData: gameData,
@@ -153,18 +101,18 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
   //find the player object in the players table with this socket id
-    walkoff.table('players').filter({
+    r.db.table('players').filter({
       sid: socket.id
-    }).coerceTo('array').run(connection, function(err, playerArray) {
+    }).coerceTo('array').run(r.connection, function(err, playerArray) {
       if (playerArray.length > 0) {
         var player = playerArray[0]
         var playerID = player.id
         var games = player.games
-        walkoff.table('players').get(playerID).update({
+        r.db.table('players').get(playerID).update({
           connected: false
-        }).run(connection, function(err, response) {
+        }).run(r.connection, function(err, response) {
           console.log(getTimeStamp() + playerID + ' disconnected')
-          //loop through player games and emit disconnection notice
+          //loop through player games and emit disr.connection notice
           for (var i = 0; i < games.length; i++) {
             var gameID = games[i]
             console.log(getTimeStamp() + playerID + ' was disconnected from ' + gameID)
@@ -185,9 +133,9 @@ io.on('connection', function(socket) {
     var playerID = socketData.playerID
     var gameID
     //filter the games table for a game object with tmpGameIDKey
-    walkoff.table('games').filter({
+    r.db.table('games').filter({
       tmpGameID: tmpGameIDKey
-    }).coerceTo('array').run(connection, function(err, newGameArray) {
+    }).coerceTo('array').run(r.connection, function(err, newGameArray) {
       //if the game object doesn't exist, create it when the first player
       //connects to the server with a tmpGameIDKey
       if (newGameArray.length == 0) {
@@ -207,8 +155,8 @@ io.on('connection', function(socket) {
           //add other key-values as needed
         }
         //update the games table
-        walkoff.table('games').insert(newGameUpdate).
-        run(connection, function(err, response) {
+        r.db.table('games').insert(newGameUpdate).
+        run(r.connection, function(err, response) {
           console.log(getTimeStamp() + response.generated_keys +
             '\n\t new game created'
           )
@@ -237,7 +185,7 @@ io.on('connection', function(socket) {
         //if the last player is joining
         if (connectedPlayerCount == newGame.playerCount) {
           //update the game object with player info and game details
-          walkoff.table('games').get(gameID).update({
+          r.db.table('games').get(gameID).update({
             gameStarted: rethink.now(),
             lastUpdate: rethink.now(),
             //clear the tmpGameID
@@ -245,15 +193,15 @@ io.on('connection', function(socket) {
             playerData: playerDataUpdate,
             playerIDs: rethink.row('playerIDs').append(playerID)
             //return data that includes the initialized game
-          },{ returnChanges: true }).run(connection, function(err, gameChanges) {
+          },{ returnChanges: true }).run(r.connection, function(err, gameChanges) {
             //add the gameID to each player object in the players table
-            walkoff.table('players').getAll(rethink.args(socketData.playerIDs)).update({
+            r.db.table('players').getAll(rethink.args(socketData.playerIDs)).update({
               games: rethink.row('games').append(gameID)
-            }).run(connection, function(err, playerChanges) {
+            }).run(r.connection, function(err, playerChanges) {
               //get alias-ID pairs from players table
-              walkoff.table('players').getAll(rethink.args(socketData.playerIDs)).
+              r.db.table('players').getAll(rethink.args(socketData.playerIDs)).
               pluck('alias', 'id').coerceTo('array').
-              run(connection, function(err, playerData){
+              run(r.connection, function(err, playerData){
                 var gameData = gameChanges.changes[0].new_val
                 console.log(getTimeStamp() + gameID +
                   '\n\t ' + playerID +
@@ -276,10 +224,10 @@ io.on('connection', function(socket) {
         } //if the player is not the first or the last
         else {
           //add player information to the games object
-          walkoff.table('games').get(gameID).update({
+          r.db.table('games').get(gameID).update({
             playerData: playerDataUpdate,
             playerIDs: rethink.row('playerIDs').append(playerID)
-          }).run(connection, function(err, response) {
+          }).run(r.connection, function(err, response) {
             console.log(getTimeStamp() + gameID +
               '\n\t ' + playerID + ' joined this game'
             )
@@ -296,10 +244,10 @@ io.on('connection', function(socket) {
         score: data.newScore
       }
       //save update to db before emitting to other players
-    walkoff.table('games').get(data.gameID).update({
+    r.db.table('games').get(data.gameID).update({
       lastUpdate: rethink.now(),
       playerData: update
-    }).run(connection, function(err, response) {
+    }).run(r.connection, function(err, response) {
       socket.to(data.gameID).emit('score-updated', {
         gameID: data.gameID,
         newScore: data.newScore,
@@ -320,7 +268,7 @@ io.on('connection', function(socket) {
 
 server.listen(2000)
 console.info(getTimeStamp() +
-' walkoff-server started. Listening on port 2000.')
+' r.db-server started. Listening on port 2000.')
 
 function getTimeStamp() {
   var date = new Date()
@@ -335,3 +283,4 @@ function getTimeStamp() {
     else { return number }
   }
 }
+
