@@ -1,15 +1,16 @@
 var r = require('../setupDatabase'),
   rethink = require('rethinkdb'),
-  getTimeStamp = require('../getTimeStamp')
-
+  getTimeStamp = require('../getTimeStamp'),
+  updateTable = require('./updateTable'),
+  insertObject = require('./insertObject')
 module.exports = function playerConnected(socket) {
   socket.on('player-connected', function(socketData) {
     //check if player exists, and update with new sid
-    r.db.table('players').get(socketData.playerID).update({
+    var playerConnectedUpdate = {
       sid: socket.id,
       connected: true
-    }).run(r.connection, function(err, response) {
-      //if player does not exist
+    }
+    function callbackFunc(response) {
       if (response.skipped == 1) {
         r.db.table('players').insert({
           id: socketData.playerID,
@@ -59,7 +60,7 @@ module.exports = function playerConnected(socket) {
             //ie, if the app was reopened and gamesCount = 0
             if (socketData.clientGamesCount == 0) {
               console.log(getTimeStamp() + socketData.playerID +
-                '\n\t client has no local gameData, emitting...'
+                '\n\t client has no local gameData, emitting gameData from server...'
               )
               r.db.table('players').getAll(rethink.args(playerIDs)).
               pluck('id', 'alias').distinct().
@@ -77,7 +78,8 @@ module.exports = function playerConnected(socket) {
             ' no existing games to join')
           }
         })
-      }
-    })
+      } 
+    }
+    updateTable('players', socketData.playerID, playerConnectedUpdate, callbackFunc)    
   })
 }
