@@ -1,0 +1,25 @@
+player-connected
+ get.update
+ table.insert
+ get.getField.do
+ getAll.coerceTo
+ getAll.pluck.distinct
+
+disconnect
+ table.filter.coerceTo
+ get.update
+ 
+create-game
+ table.filter.coerceTo
+ table.insert
+ get.update
+ getAll.update
+ getAll.pluck.coerceTo
+ get.update
+
+update-score
+ get.update
+ 
+
+ 
+ 
