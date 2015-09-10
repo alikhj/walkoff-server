@@ -493,3 +493,13 @@
 2015-09-08T23:40:31.885262000 66.210609s notice: Removing file /Users/alikhj/Documents/walkoff-server/rethinkdb_data/8a3c44a9-cbb0-4fd8-9144-df7745153f99
 2015-09-08T23:40:37.885242000 72.210844s notice: Removing file /Users/alikhj/Documents/walkoff-server/rethinkdb_data/f53dfbc9-8e08-484c-bbde-87416e4d9ed3
 2015-09-08T23:40:37.886620000 72.212222s notice: Removing file /Users/alikhj/Documents/walkoff-server/rethinkdb_data/150c5732-3850-4637-8a2a-fbba0589109f
+2015-09-09T23:55:17.746063000 0.269883s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-09-09T23:55:17.753461000 0.277277s notice: Running on Darwin 14.4.0 x86_64
+2015-09-09T23:55:17.753527000 0.277341s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-09-09T23:55:17.843318000 0.367133s info: Automatically using cache size of 845 MB
+2015-09-09T23:55:17.847886000 0.371700s notice: Listening for intracluster connections on port 29015
+2015-09-09T23:55:17.854403000 0.378218s notice: Listening for client driver connections on port 28015
+2015-09-09T23:55:17.854703000 0.378517s notice: Listening for administrative HTTP connections on port 8080
+2015-09-09T23:55:17.855536000 0.379350s notice: Listening on addresses: 127.0.0.1, 192.168.0.10, ::1, fe80::1%1, fe80::22c9:d0ff:fe85:fd2d%4, fe80::c4de:13ff:fe5b:383%8
+2015-09-09T23:55:17.855572000 0.379387s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-09-09T23:55:18.001575000 0.525389s notice: A newer version of the RethinkDB server is available: 2.1.3. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.

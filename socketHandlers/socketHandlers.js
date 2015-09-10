@@ -1,6 +1,6 @@
 var r = require('../setupDatabase'),
   rethink = require('rethinkdb'),
-  getTimeStamp = require('../getTimeStamp')
+  getTimeStamp = require('../helpers/getTimeStamp')
 
 module.exports = function socketHandlers(server) {
   io = require('socket.io').listen(server)
@@ -55,7 +55,7 @@ module.exports = function socketHandlers(server) {
           )
           var newGameUpdate = {
             tmpGameID: tmpGameIDKey,
-            playerCount: socketData.count,
+            playerCount: socketData.playerCount,
             playerData: {},
             playerIDs: [playerID]
           }

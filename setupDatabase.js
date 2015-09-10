@@ -1,4 +1,6 @@
-var rethink = require('rethinkdb')
+var rethink = require('rethinkdb'),
+  getTimeStamp = require('./helpers/getTimeStamp')
+  
 var connection
 var db
 
@@ -54,4 +56,3 @@ function createTables() {
     }
   })
 }
-
