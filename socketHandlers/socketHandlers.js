@@ -7,7 +7,7 @@ module.exports = function socketHandlers(server) {
   io.on('connection', function(socket) {
     console.log(getTimeStamp() + socket.id + ' connected')
 
-    var playerConnected = require('./playerConnected')(socket)
+    var playerConnected = require('./playerConnected/playerConnected')(socket)
 
     socket.on('disconnect', function() {
     //find the player object in the players table with this socket id
