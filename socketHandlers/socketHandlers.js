@@ -15,37 +15,14 @@ module.exports = function socketHandlers(server) {
       var disconnect = require('./disconnect/disconnect')(socket)
     })
 
-    socket.on('create-game', function(socketData) {
-      var createGame = require('./createGame/createGame.js')(socket, socketData)
+    socket.on('new-game', function(socketData) {
+      var newGame = require('./newGame/newGame.js')(socket, socketData)
      })
 
-    socket.on('update-score', function(data) {
-      //create object with updated keys
-      var update = {}
-      update[data.playerID] = {
-          score: data.newScore
-        }
-        //save update to db before emitting to other players
-      r.db.table('games').get(data.gameID).update({
-        lastUpdate: rethink.now(),
-        playerData: update
-      }).run(r.connection, function(err, response) {
-        socket.to(data.gameID).emit('score-updated', {
-          gameID: data.gameID,
-          newScore: data.newScore,
-          playerID: data.playerID
-        })
-        console.log(getTimeStamp() + data.gameID +
-          '\n\t update-score received from ' + data.playerID +
-          '\n\t newScore: ' + data.newScore)
-      })
-    })
+    socket.on('update-score', function(socketData) {
+      var updateScore = require('./updateScore/updateScore.js')(socket, socketData)
 
-    socket.on('get-player-id', function() {
-      socket.emit('player-id', { playerID: socket.playerID })
     })
-
-  //close io.on...
+    
   })
 }
-

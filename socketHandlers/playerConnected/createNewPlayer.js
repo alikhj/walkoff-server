@@ -3,25 +3,21 @@ var r = require('../../setupDatabase'),
   getTimeStamp = require('../../helpers/getTimeStamp')
 
 module.exports = function createNewPlayer(socket, socketData) {
-    var newPlayerObject = {
-      id: socketData.playerID,
-      alias: socketData.playerAlias,
-      connected: true,
-      lastUpdate: rethink.now(),
-      sid: socket.id,
-      games: []
-    }
+  var newPlayerObject = {
+    id: socketData.playerID,
+    alias: socketData.playerAlias,
+    connected: true,
+    lastUpdate: rethink.now(),
+    sid: socket.id,
+    games: []
+  }
 
-    r.db.table('players').insert(newPlayerObject).
-    run(r.connection, function(err, response) {
-      callback(response)
-    })
-
-    function callback(response) {
-      console.log(getTimeStamp() + socketData.playerID +
+  r.db.table('players').insert(newPlayerObject).
+  run(r.connection, function(err, response) {
+    console.log(getTimeStamp() + socketData.playerID +
       ' does not exist, was added to players table: ' +
       '\n\t id: ' + socketData.playerID +
       '\n\t sid: ' + socket.id
-      )
-  }
+    )
+  })
 }

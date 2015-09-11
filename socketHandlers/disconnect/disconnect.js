@@ -8,10 +8,16 @@ module.exports = function disconnect(socket) {
   }).update({ connected: false }, {returnChanges: true}).
 
   run(r.connection, function(err, response) {
-    if (typeof response.changes === 'undefined') { console.log('browser disconnected'); return }
-    if (response.changes[0]) { 
+    if (typeof response === 'undefined') {
+      console.log(getTimeStamp() + 'disconnect response was undefined')
+    }
+    if (typeof response.changes === 'undefined') {
+      console.log(getTimeStamp() + 'browser disconnected'); return
+    }
+
+    if (response.changes[0]) {
       var player = response.changes[0].new_val
-      callback(player)
+      notifyGames(player)
     }
     else {
       //error handling if socket id doesn't exist
@@ -19,15 +25,15 @@ module.exports = function disconnect(socket) {
 
   })
 
-  function callback(player) {
+  function notifyGames(player) {
     var playerID = player.id
     var games = player.games
-      
+
     console.log(getTimeStamp() + playerID + ' disconnected')
-      
+
     for(var i = 0; i < games.length; i++) {
       var gameID = games[i]
-      
+
       socket.to(gameID).emit('player-disconnected', {
         playerID: playerID,
         gameID: gameID

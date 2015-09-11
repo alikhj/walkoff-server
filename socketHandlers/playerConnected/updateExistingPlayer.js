@@ -19,12 +19,12 @@ module.exports = function updateExistingPlayer(socket, socketData) {
     return r.db.table('games').getAll(rethink.args(gameIDs)).coerceTo('array')
 
   }).run(r.connection, function(err, gameData) {
-    callback(gameData)
+    updatePlayer(gameData)
   })
 
   var playerIDs = []
 
-  function callback(gameData) {
+  function updatePlayer(gameData) {
     //loop through game objects and join each game
     if (gameData && gameData.length > 0) {
 
