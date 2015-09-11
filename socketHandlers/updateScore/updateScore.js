@@ -16,7 +16,7 @@ module.exports = function updateScore(socket, socketData) {
     emitScore()
   })
 
-  function emitScore( {
+  function emitScore() {
     socket.to(socketData.gameID).emit('score-updated', {
       gameID: socketData.gameID,
       newScore: socketData.newScore,
@@ -25,5 +25,5 @@ module.exports = function updateScore(socket, socketData) {
     console.log(getTimeStamp() + socketData.gameID +
       '\n\t update-score received from ' + socketData.playerID +
       '\n\t newScore: ' + socketData.newScore)
-  })
+  }
 }
