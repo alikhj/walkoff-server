@@ -530,3 +530,8 @@
 2015-09-11T01:03:28.136999000 0.345469s notice: Listening on addresses: 127.0.0.1, 192.168.0.10, ::1, fe80::1%1, fe80::1c81:2eff:fec8:b19c%8, fe80::22c9:d0ff:fe85:fd2d%4
 2015-09-11T01:03:28.137011000 0.345480s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
 2015-09-11T01:03:28.279155000 0.487624s notice: A newer version of the RethinkDB server is available: 2.1.3. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2015-09-14T00:04:09.631389000 42382.839264s notice: Server got SIGINT from pid 940, uid 501; shutting down...
+2015-09-14T00:04:09.635168000 42382.843039s notice: Shutting down client connections...
+2015-09-14T00:04:09.641187000 42382.849058s notice: All client connections closed.
+2015-09-14T00:04:09.641209000 42382.849079s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-09-14T00:04:09.678257000 42382.886128s notice: Storage engine shut down.

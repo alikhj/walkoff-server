@@ -25,5 +25,12 @@ module.exports = function updateScore(socket, socketData) {
     console.log(getTimeStamp() + socketData.gameID +
       '\n\t update-score received from ' + socketData.playerID +
       '\n\t newScore: ' + socketData.newScore)
+      updatePlayer()
+  }
+
+  function updatePlayer() {
+    r.db.table('players').get(socketData.playerID).update({
+      lastUpdate: rethink.now()
+    }).run(r.connection, function(err, response){})
   }
 }

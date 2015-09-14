@@ -1,0 +1,39 @@
+#steps multiplier for a limited time
+"heres a skateboard for 10 minutes"
+  -ÿrandomly acquired after a steps update
+  -ÿafter a milestone step count (1000, 5000)
+  -ÿwhen an opponent is about to be passed
+  -ÿwhen an opponent is about to pass
+
+#offense
+  ?ÿsend a bear:
+    opponent must generate a number of steps in a limited time to outrun the
+    bear. if opponent fails, step count is halved for a limited time
+  ?ÿdrop a banana:
+    opponent loses a number of steps, can only be avoided if a steps
+    multiplier is active
+
+#inactivity
+  ?ÿif no steps update occur in 3 hrs, steps are slowly substracted
+    use setInterval and clearInterval
+
+
+
+steps updated
+is there an item already held? if no...
+score is evaluated by helper class (did player hit a milestone?)
+helper class returns item id
+game class passes item id to item look up function
+item look up function returns interval, start and stop functions
+game class holds item until player activates
+
+steps updated
+itemExists is set to false
+score is evaluated by helper class (did player hit a milestone?)
+helper class returns item id
+game class passes item id item factory
+item factory creates an object and returns it to game
+game 
+game class holds item until player activates
+
+object has function, title, interval
