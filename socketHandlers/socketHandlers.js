@@ -17,7 +17,11 @@ module.exports = function socketHandlers(server) {
 
     socket.on('new-game', function(socketData) {
       var newGame = require('./newGame/newGame.js')(socket, socketData)
-     })
+    })
+
+    socket.on('leave-game', function(socketData) {
+      var leaveGame = require('./leaveGame/leaveGame.js')(socket, socketData)
+    })
 
     socket.on('update-score', function(socketData) {
       var updateScore = require('./updateScore/updateScore.js')(socket, socketData)

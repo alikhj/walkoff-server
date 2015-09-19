@@ -1,4 +1,4 @@
-var r = require('../../setupDatabase'),
+vr r = require('../../setupDatabase'),
   rethink = require('rethinkdb'),
   getTimeStamp = require('../../helpers/getTimeStamp')
 
