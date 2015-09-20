@@ -13,52 +13,20 @@ module.exports = function updateExistingPlayer(socket, socketData) {
     ' checking for existing games... '
   )
 
-  //pull player's gameData
+  //pull player's gamesData
   r.db.table('players').get(socketData.playerID).getField('games').do(
   function(gameIDs) {
     return r.db.table('games').getAll(rethink.args(gameIDs)).coerceTo('array')
 
-  }).run(r.connection, function(err, gameData) {
-    updatePlayer(gameData)
+  }).run(r.connection, function(err, gamesData) {
+    updatePlayer(gamesData)
   })
 
   var playerIDs = []
 
-  function updatePlayer(gameData) {
-    //loop through game objects and join each game
-    if (gameData && gameData.length > 0) {
-
-      joinGames(gameData)
-
-      if (socketData.clientGamesCount == 0) {
-
-        console.log(getTimeStamp() + socketData.playerID +
-          '\n\t client has no local gameData, emitting gameData from server...'
-        )
-
-        r.db.table('players').getAll(rethink.args(playerIDs)).
-        pluck('id', 'alias').distinct().
-        run(r.connection, function(err, playerData) {
-          //emit games and players data to the player
-          socket.emit('all-data', {
-            gameData: gameData,
-            playerData: playerData
-          })
-
-        })
-      }
-
-    } //end if
-
-    else {
-      console.log(getTimeStamp() + socketData.playerID +
-      ' no existing games to join')
-    }
-  }
-
-  function joinGames(gameData) {
-    for (var i = 0; i < gameData.length; i++) {
-      var game = gameData[i]
+  function joinGames(gamesData) {
+    for (var i = 0; i < gamesData.length; i++) {
+      var game = gamesData[i]
       var gameID = game.id
 
       console.log(getTimeStamp() + socketData.playerID +
@@ -74,5 +42,36 @@ module.exports = function updateExistingPlayer(socket, socketData) {
       playerIDs = playerIDs.concat(game.playerIDs)
 
     } //end for
+  }
+
+  function updatePlayer(gamesData) {
+    //loop through game objects and join each game
+    if (gamesData && gamesData.length > 0) {
+
+      joinGames(gamesData)
+
+      if (socketData.clientGamesCount == 0) {
+
+        console.log(getTimeStamp() + socketData.playerID +
+          '\n\t client has no local gamesData, emitting gamesData from server...'
+        )
+
+        r.db.table('players').getAll(rethink.args(playerIDs)).
+        pluck('id', 'alias').distinct().
+        run(r.connection, function(err, playerData) {
+          //emit games and players data to the player
+          socket.emit('all-data', {
+            gamesData: gamesData,
+            playerData: playerData
+          })
+        })
+      }
+
+    } //end if
+
+    else {
+      console.log(getTimeStamp() + socketData.playerID +
+      ' no existing games to join')
+    }
   }
 }
