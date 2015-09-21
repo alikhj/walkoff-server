@@ -26,7 +26,7 @@ module.exports = function leaveGame(socket, socketData) {
   }
 
   function updatePlayerData(gameID, playerID) {
-    var status = 'quit'
+    var status = '👻'
     var playerDataUpdate = {}
     playerDataUpdate[playerID] = {
       score: 0,

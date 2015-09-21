@@ -14,7 +14,7 @@ module.exports = function createGame(socket, socketData, tmpGameIDKey) {
   //insert player data object into newGameUpdate
   newGame.playerData[playerID] = {
     score: 0,
-    status: '💤'
+    status: '🏁'
     //add other key-values as needed
   }
   //update the games table
