@@ -27,8 +27,8 @@ module.exports = function socketHandlers(server) {
       var updateScore = require('./updateScore/updateScore.js')(socket, socketData)
     })
 
-    socket.on('update-status', function(socketData) {
-      var updateStatus = require('./updateStatus/updateStatus.js')(socket, socketData)
+    socket.on('update-item', function(socketData) {
+      var updateStatus = require('./updateItem/updateItem.js')(socket, socketData)
     })
 
   })
