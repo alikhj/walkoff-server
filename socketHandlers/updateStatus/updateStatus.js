@@ -8,7 +8,7 @@ module.exports = function updateStatus(socket, socketData) {
   update[socketData.playerID] = {
       status: socketData.newStatus,
     }
-    //save update to db before emitting to other players
+  //save update to db before emitting to other players
   r.db.table('games').get(socketData.gameID).update({
     lastUpdate: rethink.now(),
     playerData: update

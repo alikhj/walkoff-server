@@ -11,10 +11,16 @@ module.exports = function createGame(socket, socketData, tmpGameIDKey) {
     playerData: {},
     playerIDs: [playerID]
   }
+
+  var status = {
+    activity: '🏁',
+    powerUp: '',
+    powerDown: ''
+  }
   //insert player data object into newGameUpdate
   newGame.playerData[playerID] = {
     score: 0,
-    status: '🏁'
+    status: status 
     //add other key-values as needed
   }
   //update the games table
