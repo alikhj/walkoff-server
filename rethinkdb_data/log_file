@@ -640,3 +640,19 @@
 2015-09-24T19:06:09.996339000 0.434433s notice: Listening on addresses: 127.0.0.1, 192.168.0.3, ::1, fe80::1%1, fe80::f29:d67c:b9bc:6df8%10, fe80::22c9:d0ff:fe85:fd2d%4, fe80::6d38:db96:c4e7:259b%11, fe80::94e7:e7ff:fed5:105%8
 2015-09-24T19:06:09.996385000 0.434479s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
 2015-09-24T19:06:10.162771000 0.600866s notice: A newer version of the RethinkDB server is available: 2.1.4. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2015-10-06T23:00:19.886749000 296479.006701s notice: Server got SIGINT from pid 358, uid 501; shutting down...
+2015-10-06T23:00:19.892579000 296479.012530s notice: Shutting down client connections...
+2015-10-06T23:00:19.897646000 296479.017597s notice: All client connections closed.
+2015-10-06T23:00:19.897691000 296479.017641s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-10-06T23:00:19.985657000 296479.105608s notice: Storage engine shut down.
+2015-10-06T23:00:21.586451000 0.328979s notice: Running rethinkdb 2.0.4 (CLANG 6.1.0 (clang-602.0.53))...
+2015-10-06T23:00:21.593531000 0.336057s notice: Running on Darwin 14.5.0 x86_64
+2015-10-06T23:00:21.593576000 0.336099s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-10-06T23:00:21.670056000 0.412580s info: Automatically using cache size of 387 MB
+2015-10-06T23:00:21.671962000 0.414486s notice: Listening for intracluster connections on port 29015
+2015-10-06T23:00:21.674420000 0.416944s notice: Listening for client driver connections on port 28015
+2015-10-06T23:00:21.674581000 0.417105s notice: Listening for administrative HTTP connections on port 8080
+2015-10-06T23:00:21.679056000 0.421581s notice: Listening on addresses: 127.0.0.1, 192.168.0.9, ::1, fe80::1%1, fe80::f29:d67c:b9bc:6df8%10, fe80::22c9:d0ff:fe85:fd2d%4, fe80::6d38:db96:c4e7:259b%11, fe80::94e7:e7ff:fed5:105%8
+2015-10-06T23:00:21.679068000 0.421592s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-10-06T23:00:21.848702000 0.591226s notice: A newer version of the RethinkDB server is available: 2.1.4. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2015-10-08T22:47:02.509756000 86400.591212s notice: A newer version of the RethinkDB server is available: 2.1.5-2. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
