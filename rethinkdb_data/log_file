@@ -656,3 +656,131 @@
 2015-10-06T23:00:21.679068000 0.421592s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
 2015-10-06T23:00:21.848702000 0.591226s notice: A newer version of the RethinkDB server is available: 2.1.4. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
 2015-10-08T22:47:02.509756000 86400.591212s notice: A newer version of the RethinkDB server is available: 2.1.5-2. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2015-10-31T00:57:39.400407000 0.294664s notice: Recursively removing directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data/tmp
+2015-10-31T00:57:39.402344000 0.296612s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-10-31T00:57:39.409297000 0.303553s notice: Running on Darwin 15.0.0 x86_64
+2015-10-31T00:57:39.409359000 0.303614s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-10-31T00:57:39.414214000 0.308470s notice: Migrating cluster metadata
+2015-10-31T00:57:39.872171000 0.766437s notice: Migrating auth metadata
+2015-10-31T00:57:39.959214000 0.853480s info: Automatically using cache size of 589 MB
+2015-10-31T00:57:39.959971000 0.854237s notice: Listening for intracluster connections on port 29015
+2015-10-31T00:57:39.992775000 0.887042s notice: Listening for client driver connections on port 28015
+2015-10-31T00:57:39.993024000 0.887290s notice: Listening for administrative HTTP connections on port 8080
+2015-10-31T00:57:39.993027000 0.887293s notice: Listening on addresses: 127.0.0.1, ::1
+2015-10-31T00:57:39.993029000 0.887295s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-10-31T00:57:39.993031000 0.887296s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-10-31T00:57:41.161998000 2.056276s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: Starting a new Raft election for term 1.
+2015-10-31T00:57:41.244240000 2.138518s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: This server is Raft leader for term 1. Latest log index is 0.
+2015-10-31T00:57:41.535621000 2.429898s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: Starting a new Raft election for term 1.
+2015-10-31T00:57:41.649620000 2.543898s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: This server is Raft leader for term 1. Latest log index is 0.
+2015-10-31T00:57:45.267812000 6.162133s notice: Server got SIGINT from pid 1310, uid 501; shutting down...
+2015-10-31T00:57:45.268030000 6.162351s notice: Shutting down client connections...
+2015-10-31T00:57:45.268353000 6.162675s notice: All client connections closed.
+2015-10-31T00:57:45.268364000 6.162685s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-10-31T00:57:45.276083000 6.170405s notice: Storage engine shut down.
+2015-10-31T00:57:49.660520000 0.006814s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-10-31T00:57:49.665310000 0.011593s notice: Running on Darwin 15.0.0 x86_64
+2015-10-31T00:57:49.665367000 0.011649s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-10-31T00:57:49.747402000 0.093684s info: Automatically using cache size of 594 MB
+2015-10-31T00:57:49.750201000 0.096483s notice: Listening for intracluster connections on port 29015
+2015-10-31T00:57:49.792766000 0.139048s notice: Listening for client driver connections on port 28015
+2015-10-31T00:57:49.793076000 0.139359s notice: Listening for administrative HTTP connections on port 8080
+2015-10-31T00:57:49.794322000 0.140604s notice: Listening on addresses: 127.0.0.1, 192.168.0.13, ::1, fe80::1%1, fe80::aa66:7fff:fe21:2c3%4, fe80::ccd9:4bff:fe9a:3694%6
+2015-10-31T00:57:49.794334000 0.140616s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-10-31T00:57:51.110315000 1.456608s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: Starting a new Raft election for term 2.
+2015-10-31T00:57:51.192605000 1.538898s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: This server is Raft leader for term 2. Latest log index is 3.
+2015-10-31T00:57:51.461866000 1.808170s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: Starting a new Raft election for term 2.
+2015-10-31T00:57:51.583050000 1.929354s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: This server is Raft leader for term 2. Latest log index is 3.
+2015-10-31T00:57:51.695542000 2.041847s notice: Server got SIGINT from pid 1310, uid 501; shutting down...
+2015-10-31T00:57:51.695741000 2.042045s notice: Shutting down client connections...
+2015-10-31T00:57:51.696219000 2.042523s notice: All client connections closed.
+2015-10-31T00:57:51.696225000 2.042529s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-10-31T00:57:51.918933000 2.265237s notice: Storage engine shut down.
+2015-10-31T01:08:14.343903000 0.268446s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-10-31T01:08:14.352665000 0.277197s notice: Running on Darwin 15.0.0 x86_64
+2015-10-31T01:08:14.352746000 0.277275s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-10-31T01:08:14.464154000 0.388684s info: Automatically using cache size of 692 MB
+2015-10-31T01:08:14.467625000 0.392154s notice: Listening for intracluster connections on port 29015
+2015-10-31T01:08:14.508955000 0.433485s notice: Listening for client driver connections on port 28015
+2015-10-31T01:08:14.509269000 0.433799s notice: Listening for administrative HTTP connections on port 8080
+2015-10-31T01:08:14.510485000 0.435015s notice: Listening on addresses: 127.0.0.1, 192.168.0.13, ::1, fe80::1%1, fe80::aa66:7fff:fe21:2c3%4, fe80::ccd9:4bff:fe9a:3694%6
+2015-10-31T01:08:14.510583000 0.435112s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-10-31T01:08:15.686735000 1.611286s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: Starting a new Raft election for term 3.
+2015-10-31T01:08:15.759493000 1.684044s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: This server is Raft leader for term 3. Latest log index is 4.
+2015-10-31T01:08:16.221110000 2.145661s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: Starting a new Raft election for term 3.
+2015-10-31T01:08:16.377931000 2.302482s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: This server is Raft leader for term 3. Latest log index is 5.
+2015-11-01T19:07:06.532191000 12122.569080s notice: Server got SIGINT from pid 4107, uid 501; shutting down...
+2015-11-01T19:07:06.532328000 12122.569217s notice: Shutting down client connections...
+2015-11-01T19:07:06.532944000 12122.569833s notice: All client connections closed.
+2015-11-01T19:07:06.532957000 12122.569846s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-11-01T19:07:06.546484000 12122.583374s notice: Storage engine shut down.
+2015-11-01T19:07:08.511471000 0.478763s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-11-01T19:07:08.520358000 0.487640s notice: Running on Darwin 15.0.0 x86_64
+2015-11-01T19:07:08.520470000 0.487749s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-11-01T19:07:08.642309000 0.609589s info: Automatically using cache size of 460 MB
+2015-11-01T19:07:08.645770000 0.613048s notice: Listening for intracluster connections on port 29015
+2015-11-01T19:07:08.693297000 0.660577s notice: Listening for client driver connections on port 28015
+2015-11-01T19:07:08.693613000 0.660892s notice: Listening for administrative HTTP connections on port 8080
+2015-11-01T19:07:08.696066000 0.663345s notice: Listening on addresses: 127.0.0.1, 192.168.0.13, ::1, fe80::1%1, fe80::28a1:aa14:2e5c:d262%7, fe80::aa66:7fff:fe21:2c3%4, fe80::ccd9:4bff:fe9a:3694%6
+2015-11-01T19:07:08.696223000 0.663502s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-11-01T19:07:10.277571000 2.244861s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: Starting a new Raft election for term 4.
+2015-11-01T19:07:10.364627000 2.331917s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: This server is Raft leader for term 4. Latest log index is 8.
+2015-11-01T19:07:10.383861000 2.351151s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: Starting a new Raft election for term 4.
+2015-11-01T19:07:10.518003000 2.485293s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: This server is Raft leader for term 4. Latest log index is 8.
+2015-11-01T19:09:29.044400000 0.345592s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-11-01T19:09:29.055414000 0.356594s notice: Running on Darwin 15.0.0 x86_64
+2015-11-01T19:09:29.055493000 0.356670s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-11-01T19:09:29.153066000 0.454244s info: Automatically using cache size of 390 MB
+2015-11-01T19:09:29.155905000 0.457083s notice: Listening for intracluster connections on port 29015
+2015-11-01T19:09:29.208289000 0.509467s notice: Listening for client driver connections on port 28015
+2015-11-01T19:09:29.208598000 0.509775s notice: Listening for administrative HTTP connections on port 8080
+2015-11-01T19:09:29.210284000 0.511462s notice: Listening on addresses: 127.0.0.1, 192.168.0.13, ::1, fe80::1%1, fe80::28a1:aa14:2e5c:d262%7, fe80::aa66:7fff:fe21:2c3%4, fe80::ccd9:4bff:fe9a:3694%6
+2015-11-01T19:09:29.210301000 0.511479s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-11-01T19:09:30.842453000 2.143642s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: Starting a new Raft election for term 5.
+2015-11-01T19:09:30.932142000 2.233331s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: This server is Raft leader for term 5. Latest log index is 11.
+2015-11-01T19:09:31.021553000 2.322742s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: Starting a new Raft election for term 5.
+2015-11-01T19:09:31.141823000 2.443012s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: This server is Raft leader for term 5. Latest log index is 11.
+2015-11-01T19:10:47.763097000 0.008049s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-11-01T19:10:47.775150000 0.020091s notice: Running on Darwin 15.0.0 x86_64
+2015-11-01T19:10:47.775230000 0.020169s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-11-01T19:10:47.886060000 0.130999s info: Automatically using cache size of 393 MB
+2015-11-01T19:10:47.888295000 0.133234s notice: Listening for intracluster connections on port 29015
+2015-11-01T19:10:47.950873000 0.195812s notice: Listening for client driver connections on port 28015
+2015-11-01T19:10:47.951206000 0.196145s notice: Listening for administrative HTTP connections on port 8080
+2015-11-01T19:10:47.952529000 0.197468s notice: Listening on addresses: 127.0.0.1, 192.168.0.13, ::1, fe80::1%1, fe80::28a1:aa14:2e5c:d262%7, fe80::aa66:7fff:fe21:2c3%4, fe80::ccd9:4bff:fe9a:3694%6
+2015-11-01T19:10:47.952546000 0.197484s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-11-01T19:10:48.947482000 1.192431s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: Starting a new Raft election for term 6.
+2015-11-01T19:10:49.034925000 1.279873s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: This server is Raft leader for term 6. Latest log index is 14.
+2015-11-01T19:10:49.876494000 2.121442s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: Starting a new Raft election for term 6.
+2015-11-01T19:10:49.958204000 2.203152s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: This server is Raft leader for term 6. Latest log index is 14.
+2015-11-01T19:26:33.097935000 945.347826s notice: Server got SIGINT from pid 13506, uid 501; shutting down...
+2015-11-01T19:26:33.098126000 945.348016s notice: Shutting down client connections...
+2015-11-01T19:26:33.098309000 945.348199s notice: All client connections closed.
+2015-11-01T19:26:33.098318000 945.348208s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-11-01T19:26:33.105945000 945.355836s notice: Storage engine shut down.
+2015-11-01T19:33:09.274791000 0.366424s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-11-01T19:33:09.282290000 0.373915s notice: Running on Darwin 15.0.0 x86_64
+2015-11-01T19:33:09.282366000 0.373989s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-11-01T19:33:09.387632000 0.479266s info: Automatically using cache size of 876 MB
+2015-11-01T19:33:09.390202000 0.481836s notice: Listening for intracluster connections on port 29015
+2015-11-01T19:33:09.439491000 0.531125s notice: Listening for client driver connections on port 28015
+2015-11-01T19:33:09.439816000 0.531450s notice: Listening for administrative HTTP connections on port 8080
+2015-11-01T19:33:09.444675000 0.536308s notice: Listening on addresses: 127.0.0.1, 192.168.0.13, ::1, fe80::1%1, fe80::28a1:aa14:2e5c:d262%7, fe80::aa66:7fff:fe21:2c3%4, fe80::ccd9:4bff:fe9a:3694%6
+2015-11-01T19:33:09.444691000 0.536324s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-11-01T19:33:11.042792000 2.134426s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: Starting a new Raft election for term 7.
+2015-11-01T19:33:11.121609000 2.213243s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: This server is Raft leader for term 7. Latest log index is 17.
+2015-11-01T19:33:11.182157000 2.273791s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: Starting a new Raft election for term 7.
+2015-11-01T19:33:11.277586000 2.369230s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: This server is Raft leader for term 7. Latest log index is 17.
+2015-11-01T19:48:01.297085000 0.225482s notice: Running rethinkdb 2.1.5-2 (CLANG 7.0.0 (clang-700.0.72))...
+2015-11-01T19:48:01.305323000 0.233708s notice: Running on Darwin 15.0.0 x86_64
+2015-11-01T19:48:01.305386000 0.233769s notice: Loading data from directory /Users/alikhj/Documents/walkoff-server/rethinkdb_data
+2015-11-01T19:48:01.426198000 0.354581s info: Automatically using cache size of 1970 MB
+2015-11-01T19:48:01.428802000 0.357185s notice: Listening for intracluster connections on port 29015
+2015-11-01T19:48:01.494582000 0.422965s notice: Listening for client driver connections on port 28015
+2015-11-01T19:48:01.494983000 0.423366s notice: Listening for administrative HTTP connections on port 8080
+2015-11-01T19:48:01.496520000 0.424903s notice: Listening on addresses: 127.0.0.1, 192.168.0.13, ::1, fe80::1%1, fe80::3c51:69ff:fe6a:cdbc%6, fe80::aa66:7fff:fe21:2c3%4
+2015-11-01T19:48:01.496534000 0.424917s notice: Server ready, "walkoff_zeq" 1f853b6b-56b0-42dc-8729-584bf77529b2
+2015-11-01T19:48:02.561000000 1.489392s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: Starting a new Raft election for term 8.
+2015-11-01T19:48:02.647554000 1.575946s info: Table 126766fa-c74c-4e5e-8d70-35244fe0e056: This server is Raft leader for term 8. Latest log index is 20.
+2015-11-01T19:48:03.120681000 2.049082s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: Starting a new Raft election for term 8.
+2015-11-01T19:48:03.307868000 2.236269s info: Table 08d6b4a5-abdb-4f83-a902-f2c6e9e49b08: This server is Raft leader for term 8. Latest log index is 20.

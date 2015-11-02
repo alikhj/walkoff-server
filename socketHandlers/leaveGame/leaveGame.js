@@ -26,7 +26,7 @@ module.exports = function leaveGame(socket, socketData) {
   }
 
   function updatePlayerData(gameID, playerID) {
-    var status = '👻'
+    var status = '❌'
     var playerDataUpdate = {}
     playerDataUpdate[playerID] = {
       score: 0,
@@ -42,10 +42,12 @@ module.exports = function leaveGame(socket, socketData) {
         '\n\t ' + playerID + ' has left the game'
       )
 
-      socket.to(gameID).emit('status-updated', {
+      socket.to(gameID).emit('item-updated', {
         gameID: gameID,
-        newStatus: status,
-        playerID: playerID
+        playerID: socketData.playerID,
+        itemType: "activity",
+        itemIndex: 0,
+        itemName: status
       })
 
       var playerCount = response.changes[0].new_val.playerCount
