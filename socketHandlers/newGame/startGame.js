@@ -28,7 +28,7 @@ module.exports = function startGame(socket, socketData, game) {
   function getPlayerData() {
     //get alias-ID pairs from players table
     r.db.table('players').getAll(rethink.args(socketData.playerIDs)).
-    pluck('alias', 'id').coerceTo('array').
+    pluck('alias', 'id', 'connected', 'games', 'movementType').coerceTo('array').
     run(r.connection, function(err, playerData){
 
       emitData(playerData)

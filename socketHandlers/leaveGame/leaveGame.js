@@ -26,11 +26,9 @@ module.exports = function leaveGame(socket, socketData) {
   }
 
   function updatePlayerData(gameID, playerID) {
-    var status = '❌'
     var playerDataUpdate = {}
     playerDataUpdate[playerID] = {
-      score: 0,
-      status: status
+      inGame: false
       //add key-values as needed
     }
 
@@ -39,15 +37,12 @@ module.exports = function leaveGame(socket, socketData) {
     }, { returnChanges: true }).run(r.connection, function(err, response) {
       console.log(
         getTimeStamp() + gameID +
-        '\n\t ' + playerID + ' has left the game'
+        '\n\t ' + playerID + ' has quit the game'
       )
 
-      socket.to(gameID).emit('item-updated', {
+      socket.to(gameID).emit('player-quit-game', {
         gameID: gameID,
         playerID: socketData.playerID,
-        itemType: "activity",
-        itemIndex: 0,
-        itemName: status
       })
 
       var playerCount = response.changes[0].new_val.playerCount

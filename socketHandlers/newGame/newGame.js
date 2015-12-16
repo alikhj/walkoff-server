@@ -10,7 +10,8 @@ module.exports = function newGame(socket, socketData) {
   var playerDataUpdate = {}
 
   playerDataUpdate[playerID] = {
-    score: 0
+    score: 0,
+    inGame: true
     //add key-values as needed
   }
 	//filter the games table for a game object with tmpGameIDKey

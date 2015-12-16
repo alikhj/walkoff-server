@@ -5,8 +5,8 @@ var r = require('../../setupDatabase'),
 module.exports = function updateExistingPlayer(socket, socketData) {
 
   console.log(getTimeStamp() + socketData.playerID +
-    ' updated with new sid in players table: ' +
-    '\n\t sid: ' + socket.id
+    ' updated with new sid in players table' +
+    '\n\t  sid: ' + socket.id
   )
 
   console.log(getTimeStamp() + socketData.playerID +
@@ -57,7 +57,7 @@ module.exports = function updateExistingPlayer(socket, socketData) {
         )
 
         r.db.table('players').getAll(rethink.args(playerIDs)).
-        pluck('id', 'alias').distinct().
+        pluck('id', 'alias', 'connected', 'games', 'movementType').distinct().
         run(r.connection, function(err, playerData) {
           //emit games and players data to the player
           socket.emit('all-data', {

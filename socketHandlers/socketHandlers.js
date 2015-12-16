@@ -23,13 +23,21 @@ module.exports = function socketHandlers(server) {
       var leaveGame = require('./leaveGame/leaveGame.js')(socket, socketData)
     })
 
-    socket.on('update-score', function(socketData) {
-      var updateScore = require('./updateScore/updateScore.js')(socket, socketData)
+    // socket.on('update-score', function(socketData) {
+    //   var updateScore = require('./updateScore/updateScore.js')(socket, socketData)
+    // })
+
+    socket.on('update-movement', function(socketData) {
+      var updateScore = require('./movement/updateMovement.js')(socket, socketData)
     })
 
     socket.on('update-item', function(socketData) {
       var updateStatus = require('./updateItem/updateItem.js')(socket, socketData)
     })
 
+    socket.on('chaseWeapon-fired', function(socketData) {
+      console.log(socketData)
+      var chaseWeaponFired = require('./weapons/chaseWeapon-fired.js')(io, socketData)
+    })
   })
 }

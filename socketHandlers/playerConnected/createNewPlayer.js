@@ -6,6 +6,7 @@ module.exports = function createNewPlayer(socket, socketData) {
   var newPlayerObject = {
     id: socketData.playerID,
     alias: socketData.playerAlias,
+    movementType: socketData.movementType,
     connected: true,
     lastUpdate: rethink.now(),
     sid: socket.id,
