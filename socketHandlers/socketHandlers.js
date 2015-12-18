@@ -35,9 +35,9 @@ module.exports = function socketHandlers(server) {
       var updateStatus = require('./updateItem/updateItem.js')(socket, socketData)
     })
 
-    socket.on('chaseWeapon-fired', function(socketData) {
+    socket.on('weapon-fired', function(socketData) {
       console.log(socketData)
-      var chaseWeaponFired = require('./weapons/chaseWeapon-fired.js')(io, socketData)
+      var chaseWeaponFired = require('./weapons/weapon-fired.js')(io, socketData)
     })
   })
 }
