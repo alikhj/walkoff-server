@@ -11,20 +11,22 @@ module.exports = function playerConnected(socket, socketData) {
 
   r.db.table('players').get(socketData.playerID).update(update).
   run(r.connection, function(err, response) {
+
     callback(response)
   })
 
   function callback(response) {
 
     if (response.skipped == 1) {
+
       var createNewPlayer =
-      require('./createNewPlayer')(socket, socketData)
+      require('./createNewPlayer.js')(socket, socketData)
     }
 
     //if player already exists
     else {
       var updateExistingPlayer =
-      require('./updateExistingPlayer')(socket, socketData)
+      require('./updateExistingPlayer.js')(socket, socketData)
 
     }
   }

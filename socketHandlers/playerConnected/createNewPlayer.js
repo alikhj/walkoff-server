@@ -7,10 +7,20 @@ module.exports = function createNewPlayer(socket, socketData) {
     id: socketData.playerID,
     alias: socketData.playerAlias,
     movementType: socketData.movementType,
-    connected: true,
+    connected: false,
     lastUpdate: rethink.now(),
-    sid: socket.id,
-    games: []
+    sid: socketData.sid,
+    games: [],
+    invitations: []
+  }
+
+  if (socket) {
+    newPlayerObject.sid = socket.id
+    newPlayerObject.connected = true
+  }
+
+  if (socketData.invitationGameID) {
+    newPlayerObject.invitations.push(socketData.invitationGameID)
   }
 
   r.db.table('players').insert(newPlayerObject).
@@ -18,7 +28,7 @@ module.exports = function createNewPlayer(socket, socketData) {
     console.log(getTimeStamp() + socketData.playerID +
       ' does not exist, was added to players table: ' +
       '\n\t id: ' + socketData.playerID +
-      '\n\t sid: ' + socket.id
+      '\n\t sid: '
     )
   })
 }

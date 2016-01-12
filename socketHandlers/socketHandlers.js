@@ -8,11 +8,11 @@ module.exports = function socketHandlers(server) {
     console.log(getTimeStamp() + socket.id + ' connected')
 
     socket.on('player-connected', function(socketData) {
-      var playerConnected = require('./playerConnected/playerConnected')(socket, socketData)
+      var playerConnected = require('./playerConnected/playerConnected.js')(socket, socketData)
     })
 
     socket.on('disconnect', function() {
-      var disconnect = require('./disconnect/disconnect')(socket)
+      var disconnect = require('./disconnect/disconnect.js')(socket)
     })
 
     socket.on('new-game', function(socketData) {
@@ -23,9 +23,10 @@ module.exports = function socketHandlers(server) {
       var leaveGame = require('./leaveGame/leaveGame.js')(socket, socketData)
     })
 
-    // socket.on('update-score', function(socketData) {
-    //   var updateScore = require('./updateScore/updateScore.js')(socket, socketData)
-    // })
+    socket.on('game-invitation', function(socketData) {
+      console.log(socketData)
+      var newGame = require('./newGame/gameInvitation.js')(socket, socketData)
+    })
 
     socket.on('update-movement', function(socketData) {
       var updateScore = require('./movement/updateMovement.js')(socket, socketData)
