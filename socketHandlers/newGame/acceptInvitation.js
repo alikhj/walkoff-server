@@ -24,9 +24,15 @@ module.exports = function acceptInvitation(socket, socketData) {
       pluck('alias', 'id', 'connected', 'games', 'movementType').coerceTo('array').
       run(r.connection, function(err, playerData) {
 
+        socket.join(gameID)
         socket.emit('game-started', {
           gameData: game,
           playerData: playerData
+        })
+
+        socket.to(gameID).emit('player-reconnected', {
+          playerID: playerID,
+          gameID: gameID
         })
       })
     })
