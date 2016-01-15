@@ -2,7 +2,7 @@ var r = require('../../setupDatabase'),
   rethink = require('rethinkdb'),
   getTimeStamp = require('../../helpers/getTimeStamp')
 
-module.exports = function gameInvitation(socket, socketData) {
+module.exports = function newInvitation(socket, socketData) {
   var gameID
   var invitedPlayersDictionary = socketData.invitedPlayers
   var invitedPlayerIDs = Object.keys(invitedPlayersDictionary)
@@ -19,14 +19,14 @@ module.exports = function gameInvitation(socket, socketData) {
     r.db.table('games').insert(newGameData).run(r.connection, function(err, response) {
       if (response) {
         gameID = response.generated_keys[0]
-        checkForPlayers()
+        checkForNewPlayers()
       } else {
         console.log("error creating game and gameID")
       }
     })
   }
 
-  function checkForPlayers() {
+  function checkForNewPlayers() {
     r.db.table('players').getAll(rethink.args(invitedPlayerIDs)).getField('id')
     .coerceTo('array').run(r.connection, function(err, existingPlayerIDs) {
 
@@ -54,7 +54,7 @@ module.exports = function gameInvitation(socket, socketData) {
           var newPlayerUpdate = {
             id: id,
             alias: invitedPlayersDictionary[id],
-            movementType: null,
+            movementType: '🏁',
             connected: false,
             lastUpdate: rethink.now(),
             sid: null,
@@ -66,17 +66,17 @@ module.exports = function gameInvitation(socket, socketData) {
 
         r.db.table('players').insert(newPlayersUpdate).
         run(r.connection, function(err, response) {
-          updateGame()
+          addPlayerDataToGame()
         })
 
       } else {
-        updateGame()
+        addPlayerDataToGame()
       }
 
     })
   }
 
-  function updateGame() {
+  function addPlayerDataToGame() {
     var playerData = {}
 
     for (invitedPlayerID in invitedPlayersDictionary) {
@@ -88,7 +88,9 @@ module.exports = function gameInvitation(socket, socketData) {
 
     r.db.table('games').get(gameID).update({playerData: playerData}).
     run(r.connection, function(err, response) {
-
+      socket.emit('new-invitations', {
+        invitations: [gameID]
+      })
     })
   }
 }

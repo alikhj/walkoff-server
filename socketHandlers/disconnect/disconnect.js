@@ -6,7 +6,6 @@ module.exports = function disconnect(socket) {
   r.db.table('players').filter({
     sid: socket.id
   }).update({ connected: false }, {returnChanges: true}).
-
   run(r.connection, function(err, response) {
     if (typeof response === 'undefined') {
       console.log(getTimeStamp() + 'disconnect response was undefined')

@@ -23,9 +23,16 @@ module.exports = function socketHandlers(server) {
       var leaveGame = require('./leaveGame/leaveGame.js')(socket, socketData)
     })
 
-    socket.on('game-invitation', function(socketData) {
-      console.log(socketData)
-      var newGame = require('./newGame/gameInvitation.js')(socket, socketData)
+    socket.on('new-invitation', function(socketData) {
+      var newInvitation = require('./newGame/newInvitation.js')(socket, socketData)
+    })
+
+    socket.on('check-invitations', function(socketData) {
+      var checkInvitations = require('./newGame/checkInvitations.js')(socket, socketData)
+    })
+
+    socket.on('accept-invitation', function(socketData) {
+      var acceptInvitation = require('./newGame/acceptInvitation.js')(socket, socketData)
     })
 
     socket.on('update-movement', function(socketData) {

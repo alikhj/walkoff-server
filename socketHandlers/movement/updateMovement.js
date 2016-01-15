@@ -12,6 +12,7 @@ module.exports = function movementUpdated(socket, socketData) {
     updateScores()
   })
 
+  //change this to a multiple insert with one call
   function updateScores() {
     for (var gameID in gameScores) {
 

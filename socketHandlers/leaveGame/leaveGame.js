@@ -40,7 +40,7 @@ module.exports = function leaveGame(socket, socketData) {
         '\n\t ' + playerID + ' has quit the game'
       )
 
-      socket.to(gameID).emit('player-quit-game', {
+      socket.to(gameID).emit('player-left-game', {
         gameID: gameID,
         playerID: socketData.playerID,
       })
