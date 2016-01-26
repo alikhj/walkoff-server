@@ -4,6 +4,7 @@ var r = require('../../setupDatabase'),
 
 module.exports = function newInvitation(socket, socketData) {
   var gameID
+  var invitation
   var invitedPlayersDictionary = socketData.invitedPlayers
   var invitedPlayerIDs = Object.keys(invitedPlayersDictionary)
   var newGameData = {
@@ -13,14 +14,19 @@ module.exports = function newInvitation(socket, socketData) {
     playerIDs: invitedPlayerIDs
   }
 
-  createNewGameWithGameData(newGameData)
+  var gameData
+  var playerData
 
-  function createNewGameWithGameData(gameData) {
-    r.db.table('games').insert(newGameData).run(r.connection, function(err, response) {
+  createNewGame(newGameData)
+
+  function createNewGame(gameData) {
+    r.db.table('games').insert(gameData).run(r.connection, function(err, response) {
       if (response) {
         gameID = response.generated_keys[0]
+
         checkForNewPlayers()
       } else {
+
         console.log("error creating game and gameID")
       }
     })
@@ -43,36 +49,49 @@ module.exports = function newInvitation(socket, socketData) {
   }
 
   function updatePlayers(existingPlayerIDs, newPlayerIDs) {
-    var update = {invitations: rethink.row('invitations').append(gameID)}
-    r.db.table('players').getAll(rethink.args(existingPlayerIDs)).update(update).
+    invitation = {
+      gameID: gameID,
+      playerID: socketData.playerID,
+      alias: socketData.alias
+    }
+
+    r.db.table('players').getAll(rethink.args(existingPlayerIDs)).
+    update({invitations: rethink.row('invitations').append(invitation)}).
     run(r.connection, function(err, response) {
 
       if (newPlayerIDs.length > 0) {
-        var newPlayersUpdate = []
-        for (i = 0; i < newPlayerIDs.length; i++) {
-          var id = newPlayerIDs[i]
-          var newPlayerUpdate = {
-            id: id,
-            alias: invitedPlayersDictionary[id],
-            movementType: '🏁',
-            connected: false,
-            lastUpdate: rethink.now(),
-            sid: null,
-            games: [],
-            invitations: [gameID]
-          }
-          newPlayersUpdate.push(newPlayerUpdate)
-        }
-
-        r.db.table('players').insert(newPlayersUpdate).
-        run(r.connection, function(err, response) {
-          addPlayerDataToGame()
-        })
+        insertNewPlayers(newPlayerIDs)
 
       } else {
+
         addPlayerDataToGame()
       }
+    })
+  }
 
+  function insertNewPlayers(newPlayerIDs) {
+
+    var newPlayers = []
+    for (i = 0; i < newPlayerIDs.length; i++) {
+      var id = newPlayerIDs[i]
+      var newPlayer = {
+        id: id,
+        alias: invitedPlayersDictionary[id],
+        movementType: '🏁',
+        connected: false,
+        lastUpdate: rethink.now(),
+        sid: null,
+        games: [],
+        invitations: [invitation]
+      }
+
+      newPlayers.push(newPlayer)
+    }
+
+    r.db.table('players').insert(newPlayers).
+    run(r.connection, function(err, response) {
+
+      addPlayerDataToGame()
     })
   }
 
@@ -88,9 +107,10 @@ module.exports = function newInvitation(socket, socketData) {
 
     r.db.table('games').get(gameID).update({playerData: playerData}).
     run(r.connection, function(err, response) {
-      socket.emit('new-invitations', {
-        invitations: [gameID]
-      })
+
+      socketData['index'] = -1
+      socketData['invitationID'] = gameID
+      var acceptInvitation = require('./acceptInvitation.js')(socket, socketData)
     })
   }
 }

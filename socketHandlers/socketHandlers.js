@@ -24,15 +24,15 @@ module.exports = function socketHandlers(server) {
     })
 
     socket.on('new-invitation', function(socketData) {
-      var newInvitation = require('./newGame/newInvitation.js')(socket, socketData)
+      var newInvitation = require('./invitation/newInvitation.js')(socket, socketData)
     })
 
     socket.on('check-invitations', function(socketData) {
-      var checkInvitations = require('./newGame/checkInvitations.js')(socket, socketData)
+      var checkInvitations = require('./invitation/checkInvitations.js')(socket, socketData)
     })
 
     socket.on('accept-invitation', function(socketData) {
-      var acceptInvitation = require('./newGame/acceptInvitation.js')(socket, socketData)
+      var acceptInvitation = require('./invitation/acceptInvitation.js')(socket, socketData)
     })
 
     socket.on('update-movement', function(socketData) {
