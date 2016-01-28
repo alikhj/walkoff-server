@@ -9,7 +9,6 @@ module.exports = function leaveGame(socket, socketData) {
 
     socket.leave(socketData.gameID)
     removeGameIDFromPlayerObject(gameIDs, socketData.gameID, socketData.playerID)
-
   })
 
   function removeGameIDFromPlayerObject(gameIDs, gameID, playerID) {
@@ -35,6 +34,7 @@ module.exports = function leaveGame(socket, socketData) {
     r.db.table('games').get(gameID).update({
       playerData: playerDataUpdate
     }, { returnChanges: true }).run(r.connection, function(err, response) {
+
       console.log(
         getTimeStamp() + gameID +
         '\n\t ' + playerID + ' has quit the game'
@@ -47,6 +47,7 @@ module.exports = function leaveGame(socket, socketData) {
 
       var playerCount = response.changes[0].new_val.playerCount
       var newCount = playerCount - 1
+
       if (newCount == 0) {
         endGame(gameID)
 

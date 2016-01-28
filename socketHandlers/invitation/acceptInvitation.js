@@ -22,14 +22,9 @@ module.exports = function acceptInvitation(socket, socketData) {
 
   function getGameData(playerID, gameID) {
 
-    var playerData = {}
-    playerData[playerID] = {
-      inGame: true
-    }
-
-    r.db.table('games').get(gameID).update({playerData: playerData}, {returnChanges: true})
+    r.db.table('games').get(gameID)
     .run(r.connection, function(err, response) {
-      var game = response.changes[0].new_val
+      var game = response
       var playerIDs = game.playerIDs
 
       getPlayerData(game, gameID, playerIDs)

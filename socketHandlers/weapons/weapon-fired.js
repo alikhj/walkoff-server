@@ -6,6 +6,8 @@ module.exports = function weaponFired(io, socketData) {
   r.db.table('players').get(socketData.toPlayerID).pluck('sid').
   run(r.connection, function(err, response) {
 
+    //send APNS if sockets is null
+
     io.sockets.connected[response.sid].emit('weapon-received', {
       gameID: socketData.gameID,
       itemType: socketData.itemType,

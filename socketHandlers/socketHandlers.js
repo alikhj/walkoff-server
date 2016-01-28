@@ -35,6 +35,10 @@ module.exports = function socketHandlers(server) {
       var acceptInvitation = require('./invitation/acceptInvitation.js')(socket, socketData)
     })
 
+    socket.on('decline-invitation', function(socketData) {
+      var declineInvitation = require('./invitation/declineInvitation.js')(socket, socketData)
+    })
+
     socket.on('update-movement', function(socketData) {
       var updateScore = require('./movement/updateMovement.js')(socket, socketData)
     })

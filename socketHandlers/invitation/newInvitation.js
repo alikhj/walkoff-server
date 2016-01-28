@@ -101,7 +101,7 @@ module.exports = function newInvitation(socket, socketData) {
     for (invitedPlayerID in invitedPlayersDictionary) {
       playerData[invitedPlayerID] = {
         score: 0,
-        inGame: false
+        inGame: true
       }
     }
 
